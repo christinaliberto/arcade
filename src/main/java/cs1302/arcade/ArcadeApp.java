@@ -1,4 +1,5 @@
 package cs1302.arcade;
+
 import javafx.geometry.Pos;
 import java.util.Random;
 import javafx.scene.control.Button;
@@ -19,7 +20,12 @@ import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.event.ActionEvent; 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background; 
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundSize; 
 
 /**
  * Application subclass for {@code ArcadeApp}.
@@ -91,6 +97,11 @@ public class ArcadeApp extends Application {
 	VBox main = new VBox();
 	HBox games = new HBox();
 	Label welcome = new Label ("Welcome to the Coding Queens Arcade!");
+	Image crownImage = new Image("file:resources/Crown-Background-300x300.jpg", 500, 500, false, false); 
+
+	BackgroundImage crowns = new BackgroundImage(crownImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+	Background background = new Background(crowns); 
+	
 	welcome.setMaxWidth(Double.MAX_VALUE);
 	welcome.setAlignment(Pos.CENTER);
 	ImageView mancalaPic = new ImageView(new Image("http://iomega-europe.com/wp-content/uploads/2018/01/logo-mancala.png"));
@@ -98,8 +109,11 @@ public class ArcadeApp extends Application {
 	mancalaPic.setOnMouseClicked(clickMancala());
 	tetrisPic.setOnMouseClicked(clickTetris());
 	games.getChildren().addAll(mancalaPic, tetrisPic);
-	main.getChildren().addAll( welcome, games); 
+	main.getChildren().addAll( welcome, games);
+	main.setBackground(background);
 	Scene scene = new Scene(main, 800, 800);
+
+
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
         stage.sizeToScene();
