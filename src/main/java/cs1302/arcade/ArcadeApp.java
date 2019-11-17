@@ -104,14 +104,18 @@ public class ArcadeApp extends Application {
 	
 	welcome.setMaxWidth(Double.MAX_VALUE);
 	welcome.setAlignment(Pos.CENTER);
-	ImageView mancalaPic = new ImageView(new Image("http://iomega-europe.com/wp-content/uploads/2018/01/logo-mancala.png"));
-	ImageView tetrisPic = new ImageView(new Image("https://ideakreativa.net/wp-content/uploads/2019/06/tetris-nuevo-logo-300x300.jpg"));
+
+	ImageView mancalaPic = new ImageView(new Image("http://iomega-europe.com/wp-content/uploads/2018/01/logo-mancala.png", 100, 100, false, false));
+	ImageView tetrisPic = new ImageView(new Image("https://ideakreativa.net/wp-content/uploads/2019/06/tetris-nuevo-logo-300x300.jpg", 100, 100, false, false));
 	mancalaPic.setOnMouseClicked(clickMancala());
 	tetrisPic.setOnMouseClicked(clickTetris());
+
 	games.getChildren().addAll(mancalaPic, tetrisPic);
-	main.getChildren().addAll( welcome, games);
+	main.getChildren().add(welcome);
+	main.getChildren().add(games); 
 	main.setBackground(background);
-	Scene scene = new Scene(main, 800, 800);
+
+	Scene scene = new Scene(main, 500, 500);
 
 
         stage.setTitle("cs1302-arcade!");
