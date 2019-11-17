@@ -1,7 +1,8 @@
 package cs1302.arcade;
 
 import java.util.Random;
-
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Group;
@@ -12,7 +13,8 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
-
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * Application subclass for {@code ArcadeApp}.
@@ -75,8 +77,12 @@ public class ArcadeApp extends Application {
         group.getChildren().add(r);                // add to main container
         r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
         group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
-
-        Scene scene = new Scene(group, 640, 480);
+	VBox box = new VBox();
+	TextField welcome = new TextField("Welcome to the Coding Queens Arcade!");
+	Button game1 = new Button( "Play Mancala" );
+	Button game2 = new Button( "Play Tetris" );
+	box.getChildren().addAll( welcome, game1, game2); 
+        Scene scene = new Scene(box);
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
         stage.sizeToScene();
