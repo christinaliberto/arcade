@@ -5,9 +5,9 @@ for this project. Please keep this document organized using Markdown. If you
 click on this file in your team's GitHub repository website, then you will see
 that the Markdown is transformed into nice looking HTML.
 
-Here is a sample entry (delete this line; also: feel free to copy/paste/modify):
 
-## SUN 2019-04-05 @ 11:55 PM EST
+
+## TUES 2019-11-19 @ 11:55 PM EST
 
 1. **DONE:** Downloaded the skeleton code.
 
