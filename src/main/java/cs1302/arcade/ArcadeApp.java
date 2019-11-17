@@ -18,10 +18,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.event.ActionEvent; 
+
 /**
  * Application subclass for {@code ArcadeApp}.
  * @version 2019.fa
  */
+
 public class ArcadeApp extends Application {
 
     Group group = new Group();           // main container
@@ -90,6 +92,10 @@ public class ArcadeApp extends Application {
 	game1.setOnAction(this::playMancala); 
 	game2.setStyle("-fx-background-color: #ff0000; ");
 	game2.setOnAction(this::playTetris); 
+	game1.setMaxWidth(Double.MAX_VALUE);                                                                                                                                      
+        game2.setMaxWidth(Double.MAX_VALUE);                                                                                                                                        
+        game1.setAlignment(Pos.CENTER);                                                                                                                                             
+        game2.setAlignment(Pos.CENTER);
 	box.getChildren().addAll( welcome, game1, game2); 
 
 	Scene scene = new Scene(box, 300, 200);
