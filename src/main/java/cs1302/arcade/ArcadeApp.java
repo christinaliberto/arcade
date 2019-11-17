@@ -1,4 +1,5 @@
 package cs1302.arcade;
+
 import javafx.geometry.Pos;
 import java.util.Random;
 import javafx.scene.control.Button;
@@ -18,7 +19,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.event.ActionEvent; 
-
+import javafx.scene.layout.Background; 
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundSize; 
 /**
  * Application subclass for {@code ArcadeApp}.
  * @version 2019.fa
@@ -84,10 +90,16 @@ public class ArcadeApp extends Application {
 
 	VBox box = new VBox();
 	Label welcome = new Label ("Welcome to the Coding Queens Arcade!");
+	Image crownImage = new Image("file:resources/Crown-Background-300x300.jpg", 500, 500, false, false); 
+
+	BackgroundImage crowns = new BackgroundImage(crownImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+	Background background = new Background(crowns); 
+	
 	welcome.setMaxWidth(Double.MAX_VALUE);
 	welcome.setAlignment(Pos.CENTER);
 	Button game1 = new Button( "Play Mancala" );
 	Button game2 = new Button( "Play Tetris" );
+
 	game1.setStyle("-fx-background-color: #ff0000; "); 
 	game1.setOnAction(this::playMancala); 
 	game2.setStyle("-fx-background-color: #ff0000; ");
@@ -97,8 +109,9 @@ public class ArcadeApp extends Application {
         game1.setAlignment(Pos.CENTER);                                                                                                                                             
         game2.setAlignment(Pos.CENTER);
 	box.getChildren().addAll( welcome, game1, game2); 
-
-	Scene scene = new Scene(box, 300, 200);
+	box.setBackground(background);
+	
+	Scene scene = new Scene(box, 500, 500);
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
         stage.sizeToScene();
