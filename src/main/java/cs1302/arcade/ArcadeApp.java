@@ -1,5 +1,5 @@
 package cs1302.arcade;
-
+import javafx.geometry.Pos;
 import java.util.Random;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -80,12 +80,18 @@ public class ArcadeApp extends Application {
 
 	VBox box = new VBox();
 	Label welcome = new Label ("Welcome to the Coding Queens Arcade!");
+	welcome.setMaxWidth(Double.MAX_VALUE);
+	welcome.setAlignment(Pos.CENTER);
 	Button game1 = new Button( "Play Mancala" );
 	Button game2 = new Button( "Play Tetris" );
-	game1.setStyle("-fx-background-color: #ff0000; "); 
+	game1.setMaxWidth(Double.MAX_VALUE);
+	game2.setMaxWidth(Double.MAX_VALUE);
+	game1.setAlignment(Pos.CENTER);
+	game2.setAlignment(Pos.CENTER);
+	box.setStyle("-fx-background-color: #ff0000; "); 
 	box.getChildren().addAll( welcome, game1, game2); 
 
-	Scene scene = new Scene(box);
+	Scene scene = new Scene(box, 300, 200);
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
         stage.sizeToScene();
