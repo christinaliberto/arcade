@@ -16,6 +16,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
+import javafx.event.ActionEvent; 
 /**
  * Application subclass for {@code ArcadeApp}.
  * @version 2019.fa
@@ -83,6 +85,9 @@ public class ArcadeApp extends Application {
 	Button game1 = new Button( "Play Mancala" );
 	Button game2 = new Button( "Play Tetris" );
 	game1.setStyle("-fx-background-color: #ff0000; "); 
+	game1.setOnAction(this::playMancala); 
+	game2.setStyle("-fx-background-color: #ff0000; ");
+	game2.setOnAction(this::playTetris); 
 	box.getChildren().addAll( welcome, game1, game2); 
 
 	Scene scene = new Scene(box);
@@ -96,5 +101,30 @@ public class ArcadeApp extends Application {
         group.requestFocus();
 
     } // start
+
+    public void playMancala(ActionEvent e) {
+	Stage mancala = new Stage();
+	mancala.initModality(Modality.APPLICATION_MODAL);
+	Group root = new Group();
+	Scene scene = new Scene(root); 
+	mancala.setTitle("Mancala");
+	mancala.setWidth(500);
+	mancala.setHeight(500);
+	mancala.setScene(scene);
+	mancala.show();
+    }
+
+    public void playTetris(ActionEvent e) {
+	Stage tetris = new Stage();
+	tetris.initModality(Modality.APPLICATION_MODAL);
+	Group root = new Group();
+	Scene scene = new Scene(root);
+	tetris.setTitle("Tetris");
+	tetris.setWidth(500);
+	tetris.setHeight(500);
+	tetris.setScene(scene);
+	tetris.show();
+    }
+	
 
 } // ArcadeApp
