@@ -15,7 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
+import javafx.scene.control.Label;
 /**
  * Application subclass for {@code ArcadeApp}.
  * @version 2019.fa
@@ -78,7 +78,7 @@ public class ArcadeApp extends Application {
         r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
         group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
 	VBox box = new VBox();
-	TextField welcome = new TextField("Welcome to the Coding Queens Arcade!");
+	Label welcome = new Label ("Welcome to the Coding Queens Arcade!");
 	Button game1 = new Button( "Play Mancala" );
 	Button game2 = new Button( "Play Tetris" );
 	box.getChildren().addAll( welcome, game1, game2); 
