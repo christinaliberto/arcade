@@ -77,12 +77,15 @@ public class ArcadeApp extends Application {
         group.getChildren().add(r);                // add to main container
         r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
         group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
+
 	VBox box = new VBox();
 	Label welcome = new Label ("Welcome to the Coding Queens Arcade!");
 	Button game1 = new Button( "Play Mancala" );
 	Button game2 = new Button( "Play Tetris" );
+	game1.setStyle("-fx-background-color: #ff0000; "); 
 	box.getChildren().addAll( welcome, game1, game2); 
-        Scene scene = new Scene(box);
+
+	Scene scene = new Scene(box);
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
         stage.sizeToScene();
