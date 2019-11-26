@@ -26,6 +26,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundSize; 
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.effect.Reflection;
+import javafx.scene.text.FontWeight; 
+import javafx.scene.text.Font;
 
 /**
  * Application subclass for {@code ArcadeApp}.
@@ -96,20 +101,33 @@ public class ArcadeApp extends Application {
 
 	VBox main = new VBox();
 	HBox games = new HBox();
-	Label welcome = new Label ("Welcome to the Coding Queens Arcade!");
+
+	Text welcome = new Text();
+	welcome.setX(10);
+	welcome.setY(50);
+	welcome.setCache(true);
+	welcome.setText("Welcome to the 530 Coding Queens Arcade!");
+	welcome.setFill(Color.RED);
+	welcome.setFont(Font.font(null, FontWeight.BOLD, 20));
+	Reflection r = new Reflection();
+	r.setFraction(0.7f);
+	welcome.setEffect(r);
+
 	Image crownImage = new Image("file:resources/Crown-Background-300x300.jpg", 500, 500, false, false); 
 
 	BackgroundImage crowns = new BackgroundImage(crownImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 	Background background = new Background(crowns); 
 	
-	welcome.setMaxWidth(Double.MAX_VALUE);
-	welcome.setAlignment(Pos.CENTER);
 
 	ImageView mancalaPic = new ImageView(new Image("http://iomega-europe.com/wp-content/uploads/2018/01/logo-mancala.png", 100, 100, false, false));
 	ImageView tetrisPic = new ImageView(new Image("https://ideakreativa.net/wp-content/uploads/2019/06/tetris-nuevo-logo-300x300.jpg", 100, 100, false, false));
+
+	mancalaPic.setTranslateX(300);
+	mancalaPic.setTranslateY(250);
+	 
+	tetrisPic.setTranslateY(250); 
 	mancalaPic.setOnMouseClicked(clickMancala());
 	tetrisPic.setOnMouseClicked(clickTetris());
-
 	games.getChildren().addAll(mancalaPic, tetrisPic);
 	main.getChildren().add(welcome);
 	main.getChildren().add(games); 
@@ -130,22 +148,38 @@ public class ArcadeApp extends Application {
     } // start
 
     public void playMancala() {
+
 	Stage mancala = new Stage();
+
 	mancala.initModality(Modality.APPLICATION_MODAL);
-	Group root = new Group();
-	Scene scene = new Scene(root); 
+
+
+	Image woodenBoard = new Image("file:resources/wood_background_hd_picture_5_169810.jpg", 552, 368, false, false);
+	BackgroundImage wooden = new BackgroundImage(woodenBoard, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+	Background mancalaBackground = new Background(wooden);
+
+	VBox vbox = new VBox();
+
+	vbox.setBackground(mancalaBackground);
+
+     	Scene scene = new Scene(vbox, 552, 368);
+	  
 	mancala.setTitle("Mancala");
-	mancala.setWidth(500);
-	mancala.setHeight(500);
+	mancala.setWidth(552);
+	mancala.setHeight(368);
 	mancala.setScene(scene);
+	 
 	mancala.show();
     }
 
     public void playTetris() {
+
 	Stage tetris = new Stage();
 	tetris.initModality(Modality.APPLICATION_MODAL);
-	Group root = new Group();
-	Scene scene = new Scene(root);
+	VBox vbox = new VBox();
+	
+	Scene scene = new Scene(vbox);
+	scene.setFill(Color.BLACK); 
 	tetris.setTitle("Tetris");
 	tetris.setWidth(500);
 	tetris.setHeight(500);
