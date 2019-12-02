@@ -1,5 +1,6 @@
 package cs1302.arcade;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import java.util.Random;
 import javafx.scene.control.Button;
@@ -28,10 +29,11 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundSize; 
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.effect.Reflection;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.text.FontWeight; 
 import javafx.scene.text.Font;
-
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.BackgroundFill;
 /**
  * Application subclass for {@code ArcadeApp}.
  * @version 2019.fa
@@ -142,13 +144,29 @@ public class ArcadeApp extends Application {
 
 	Stage tetris = new Stage();
 	tetris.initModality(Modality.APPLICATION_MODAL);
-	VBox vbox = new VBox();
-	
-	Scene scene = new Scene(vbox);
-	scene.setFill(Color.BLACK); 
+	HBox main = new HBox();
+	Image rainbow = new Image("http://hd-wallpapers.download/free/blocks_rainbow_3d_graphics_background_76559_6000x4000-3000x2000.jpg", 500, 580, false, false);
+        BackgroundImage back = new BackgroundImage(rainbow, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+	Background background = new Background(back);
+	main.setBackground(background);
+	VBox left = new VBox();
+	VBox right = new VBox();
+	HBox next = new HBox();
+
+	next.setBackground(new Background(new BackgroundFill(Color.HOTPINK, CornerRadii.EMPTY, Insets.EMPTY)));
+	next.setStyle("-fx-padding: 30;" + "-fx-border-style: solid inside;"
+        + "-fx-border-width: 4;" + "-fx-border-insets: 10;"
+        + "-fx-border-radius: 10;" + "-fx-border-color: red;");
+	HBox stats = new HBox();
+	ImageView logo = new ImageView(new Image("https://www2.instantticketcontest.com/TX/Tetris/images/logo-game@2x.png", 150, 150, false, false));
+	ImageView codegame = new ImageView(new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Emacs_Tetris_vector_based_detail.svg/2000px-Emacs_Tetris_vector_based_detail.svg.png", 300, 570, false, false));
+	left.getChildren().addAll(logo, next, stats);
+	right.getChildren().addAll(codegame);
+	main.getChildren().addAll(left, right);
+	Scene scene = new Scene(main);
 	tetris.setTitle("Tetris");
 	tetris.setWidth(500);
-	tetris.setHeight(500);
+	tetris.setHeight(580);
 	tetris.setScene(scene);
 	tetris.show();
     }
@@ -156,17 +174,15 @@ public class ArcadeApp extends Application {
     public VBox createMenu() {
 
 	VBox vbox = new VBox();
-      
+	vbox.setSpacing(120);
+	vbox.setPadding(new Insets(10, 10, 10, 10));
 	Text welcome = new Text();
 	welcome.setX(10);
 	welcome.setY(70);
 	welcome.setCache(true);
-	welcome.setText("Welcome to the 530 Coding Queens Aracde!");
-	welcome.setFill(Color.RED);
-	welcome.setFont(Font.font(null, FontWeight.BOLD, 20));
-	Reflection r = new Reflection();
-	r.setFraction(0.7f);
-	welcome.setEffect(r);
+	welcome.setText("Welcome to the 530 Coding Queens Aracde!\n" + "        Click the game you want to play");
+	welcome.setFill(Color.HOTPINK);
+	welcome.setFont(Font.font("Futura", FontWeight.BOLD, 20));
 	vbox.setBackground(createBackground());
 	vbox.getChildren().addAll(welcome, games()); 
 	return vbox; 
@@ -174,7 +190,7 @@ public class ArcadeApp extends Application {
 
     public Background createBackground() {
 
-	Image crownImage = new Image("file:resources/Crown-Background-300x300.jpg", 500, 500, false, false);
+	Image crownImage = new Image("https://i.pinimg.com/originals/b9/84/75/b984750467f7b4b000f03977cc1d2ca4.jpg", 500, 500, false, false);
 	BackgroundImage crowns = new BackgroundImage(crownImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 	Background mainBackground = new Background(crowns);
 
@@ -182,9 +198,11 @@ public class ArcadeApp extends Application {
     }
 
     public HBox games() {
-	HBox hbox = new HBox(); 
-	ImageView mancalaPic = new ImageView(new Image("http://iomega-europe.com/wp-content/uploads/2018/01/logo-mancala.png", 100, 100, false, false));
-	ImageView tetrisPic = new ImageView(new Image("https://ideakreativa.net/wp-content/uploads/2019/06/tetris-nuevo-logo-300x300.jpg", 100, 100, false, false));
+	HBox hbox = new HBox();
+	hbox.setSpacing(66);
+	hbox.setPadding(new Insets(15, 66, 15, 66));
+	ImageView mancalaPic = new ImageView(new Image("http://iomega-europe.com/wp-content/uploads/2018/01/logo-mancala.png", 150, 150, false, false));
+	ImageView tetrisPic = new ImageView(new Image("https://i-cdn.phonearena.com/images/articles/309604-thumb/tetris-h.jpg", 150, 150, false, false));
 	//	mancalaPic.translateX(300);
 	//mancalaPic.translateY(250);
 	//tetrisPic.translateY(250);
