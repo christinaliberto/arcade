@@ -34,6 +34,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Font;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.shape.Circle;
+
 /**
  * Application subclass for {@code ArcadeApp}.
  * @version 2019.fa
@@ -122,18 +124,20 @@ public class ArcadeApp extends Application {
 	mancala.initModality(Modality.APPLICATION_MODAL);
 
 
-	Image woodenBoard = new Image("file:resources/wood_background_hd_picture_5_169810.jpg", 552, 368, false, false);
+	Image woodenBoard = new Image("file:resources/wood_background_hd_picture_5_169810.jpg", 800, 800, false, false);
 	BackgroundImage wooden = new BackgroundImage(woodenBoard, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 	Background mancalaBackground = new Background(wooden);
 
 	VBox vbox = new VBox();
 
 	vbox.setBackground(mancalaBackground);
+	
 
-     	Scene scene = new Scene(vbox, 552, 368);
+
+	Scene scene = new Scene(vbox, 800, 368);
 	  
 	mancala.setTitle("Mancala");
-	mancala.setWidth(552);
+	mancala.setWidth(800);
 	mancala.setHeight(368);
 	mancala.setScene(scene);
 	 
@@ -203,10 +207,7 @@ public class ArcadeApp extends Application {
 	hbox.setPadding(new Insets(15, 66, 15, 66));
 	ImageView mancalaPic = new ImageView(new Image("http://iomega-europe.com/wp-content/uploads/2018/01/logo-mancala.png", 150, 150, false, false));
 	ImageView tetrisPic = new ImageView(new Image("https://i-cdn.phonearena.com/images/articles/309604-thumb/tetris-h.jpg", 150, 150, false, false));
-	//	mancalaPic.translateX(300);
-	//mancalaPic.translateY(250);
-	//tetrisPic.translateY(250);
-	mancalaPic.setOnMouseClicked(clickMancala());
+        mancalaPic.setOnMouseClicked(clickMancala());
 	tetrisPic.setOnMouseClicked(clickTetris()); 
 	hbox.getChildren().addAll(mancalaPic, tetrisPic);
 
