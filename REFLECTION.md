@@ -39,4 +39,25 @@ that the Markdown is transformed into nice looking HTML.
    games, which took up a great deal of time. However, we realized that we were
    making a simple mistake. In addition, we ran into some issues trying to format
    our main menu, but after playing around with the different styles, we were able
-   to overcome this issue. 
+   to overcome this issue.
+
+## WED 2019-12-4 @ 11:55 PM EST
+
+1. **DONE:** Implemented the main classes for the tetris game, which included
+   one that forms the shapes that will be used in the game, the grid from which
+   they will fall, and a randomization for their generation. We also decided that
+   we might have an easier time to implement chess rather than mancala, as we are
+   more familiar with this game.
+
+2. **TODO:** Finish up the graphical portion of tetris and implement the classes
+   in the start method for that game, and make a decision as to whether we will
+   continue with mancala or start on tetris. We also need to put any new images
+   gathered in the attributions file.
+
+3. **PROB:** We were having issues when attempting to implement mancala, which
+   is why we might change the game to chess. We ran into some issues when
+   attempting to form the shapes for tetris, as we had to use the rectangle class;
+   however, we were able to overcome this. We also ran into some issues with some
+   of the graphical interface portion for tetris. These are all things we were able to
+   overcome, or have a solution to do so in the upcoming days.
+   
