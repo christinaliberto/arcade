@@ -160,14 +160,14 @@ public class ArcadeApp extends Application {
 	HBox next = new HBox();
 	left.setSpacing(20);
 	next.setAlignment(Pos.CENTER);
-	next.setBackground(new Background(new BackgroundFill(Color.HOTPINK, CornerRadii.EMPTY, Insets.EMPTY)));
+	next.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
 	next.setStyle("-fx-padding: 5;" + "-fx-border-style: solid outside;"
         + "-fx-border-width: 5;" + "-fx-border-insets: 5;"
         + "-fx-border-radius: 5;" + "-fx-border-color: red;");
 	Text info = new Text();
 	info.setText("SCORE:\n" + " 0\n" + "LEVEL :\n" + " 1\n" + "LINES :\n" + " 0");
 	info.setFill(Color.RED);
-        info.setFont(Font.font("Futura", FontWeight.BOLD, 20));
+        info.setFont(Font.font("Futura", FontWeight.BOLD, 16));
 	next.getChildren().add(info);
 	HBox stats = new HBox();
 	ImageView logo = new ImageView(new Image("https://www2.instantticketcontest.com/TX/Tetris/images/logo-game@2x.png", 150, 150, false, false));
