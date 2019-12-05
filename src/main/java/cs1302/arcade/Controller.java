@@ -1,6 +1,6 @@
-package application;
+package cs1302.arcade; 
 
-import javafx.scene.shape.*;
+import javafx.scene.shape.Rectangle; 
 
 public class Controller {
 

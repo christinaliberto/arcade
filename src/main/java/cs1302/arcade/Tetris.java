@@ -1,6 +1,9 @@
 
 package cs1302.arcade; 
 
+import cs1302.arcade.Controller;
+import cs1302.arcade.Form;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Timer;
@@ -14,7 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javfx.shape.Rectangle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -32,7 +35,7 @@ public class Tetris extends Application {
     public static int score = 0;
     public static int top = 0; 
     private static boolean game = true;
-    private static Form newObj = Controller.makeRect();
+    private static Form nextObj = Controller.makeRect();
     private static int numberOfLines = 0;
 
     // creating scene and starting the game
@@ -42,7 +45,7 @@ public class Tetris extends Application {
     }
 
     @Override
-    public void start(Stage arg0) throws Exception {
+    public void start(Stage stage) throws Exception {
 
         for (int[] a: GRID) {
             Arrays.fill(a, 0);
@@ -59,13 +62,13 @@ public class Tetris extends Application {
         lines.setStyle("-fx-font: 20 arials;");
         lines.setY(100);
         lines.setX(XMAX + 5);
-        lnes.setFill(Color.RED);
+        lines.setFill(Color.RED);
         group.getChildren().addAll(scoretext, line, lines);
 
         Form a = nextObj;
         group.getChildren().addAll(a.a, a.b, a.c, a.d);
-        moveOnKeyPress(a);
-        object a;
+        moveOnKeyPressed(a);
+        object =  a;
         nextObj = Controller.makeRect();
         stage.setScene(scene);
         stage.setTitle("Tetris!");
@@ -73,42 +76,44 @@ public class Tetris extends Application {
 	
         
         Timer fall = new Timer();
-	TimerTask task = new TimerTask();
-    }
-    public void run() {
-	Platform.runLater(new Runnable() {
+	TimerTask task = new TimerTask() {
 		public void run() {
-		    if (object.a.getY() == 0 || object.b.getY() == 0 || object.c.getY() == 0 || object.d.getY() == 0) {
-			top++;
-		    } else {
-			top = 0;
-		    }
-		    if (top == 2) {
-			Text gameOver = new Text("GAME OVER");
-			gameOver.setFill(Color.RED);
-			gameOver.setStyle("-fx-font: 70 arial;");
-			gameOver.setY(250);
-                            gameOver.setX(10);
-                            group.getChildren().add(gameOver);
-                            game = false; 
-		    }
-		    if (top == 15) {
-			System.exit(0);
-		    }
-
-		    if (game) {
-			MoveDown(object);
-			scoreText.setText("Score: " + Integer.toString(score));
-			lines.setText("Lines: " + Integer.toString(numberOfLines));
-		    }
+				Platform.runLater(new Runnable() {
+					public void run() {
+						if (object.a.getY() == 0 || object.b.getY() == 0 || object.c.getY() == 0
+								|| object.d.getY() == 0)
+							top++;
+						else
+							top = 0;
+						
+						if (top == 2) {
+						    // GAME OVER
+						    Text over = new Text("GAME OVER");
+						    over.setFill(Color.RED);
+						    over.setStyle("-fx-font: 70 arial;");
+						    over.setY(250);
+						    over.setX(10);
+						    group.getChildren().add(over);
+						    game = false;
+						}
+						// Exit
+						if (top == 15) {
+						    System.exit(0);
+						}
+						
+						if (game) {
+						    MoveDown(object);
+						    scoretext.setText("Score: " + Integer.toString(score));
+						    lines.setText("Lines: " + Integer.toString(numberOfLines));
+						}
+					}
+				    });
 		}
 	    };
-	    }
-    };
-
-        fall.schedule(task, 0, 300);
+	fall.schedule(task, 0, 300); 
     }
-
+    
+    
     private void moveOnKeyPressed(Form form) {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
                 public void handle(KeyEvent event) {
@@ -442,7 +447,7 @@ public class Tetris extends Application {
                         rects.add(node);
                 }
                 score += 50;
-                linesNo++;
+                numberOfLines++;
                 
                 for (Node node : rects) {
                     Rectangle a = (Rectangle) node;
@@ -512,7 +517,7 @@ public class Tetris extends Application {
                         nextObj = Controller.makeRect();
                         object = a;
                         group.getChildren().addAll(a.a, a.b, a.c, a.d);
-                        moveOnKeyPress(a);
+                        moveOnKeyPressed(a);
         }
         
         if (form.a.getY() + MOVE < YMAX && form.b.getY() + MOVE < YMAX && form.c.getY() + MOVE < YMAX
