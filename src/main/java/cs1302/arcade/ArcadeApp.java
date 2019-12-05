@@ -1,5 +1,7 @@
 package cs1302.arcade;
 
+import cs1302.arcade.Tetris;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import java.util.Random;
