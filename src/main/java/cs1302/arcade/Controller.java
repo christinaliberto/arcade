@@ -42,7 +42,6 @@ public class Controller {
     } //MoveLeft
 
     public static Form makeRect () {
-
 	int block = (int)(Math.random() * 100);
 	String name;
 
@@ -50,7 +49,6 @@ public class Controller {
 	    b = new Rectangle(SIZE - 1, SIZE - 1),
 	    c = new Rectangle(SIZE - 1, SIZE - 1),
 	    d = new Rectangle(SIZE -1, SIZE - 1);  
-
 	if (block < 15) {
 	    a.setX(XMAX / 2 - SIZE);
 	    b.setX(XMAX / 2 - SIZE);
@@ -107,9 +105,7 @@ public class Controller {
 	    d.setX(XMAX / 2 + SIZE);
 	    name = "i";
 	}
-
 	return new Form (a, b, c, d, name);
-	
     }
 	    
 	    

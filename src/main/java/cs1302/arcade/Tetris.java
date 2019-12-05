@@ -29,6 +29,7 @@ public class Tetris extends Application {
     private static Form object;
     private static Scene scene = new Scene(group, XMAX + 150, YMAX);
     public static int score = 0;
+    public static int top = 0; 
     private static boolean game = true;
     private static Form newObj = Controller.makeRect();
     private static int numberOfLines = 0;
@@ -72,9 +73,63 @@ public class Tetris extends Application {
 	
 	Timer fall = new Timer();
 	TimerTask task = new TimerTask();
-	publci void run() {
+	public void run() {
 	    Platform.runLater(new Runnable() {
 		    public void run() {
-			if (object.a.getY() == 0 || object.b.getY() == 0 || object.c.getY() == 0 || object.d.getY() == 0) 
+			if (object.a.getY() == 0 || object.b.getY() == 0 || object.c.getY() == 0 || object.d.getY() == 0) {
+			    top++;
+			} else {
+			    top = 0;
+			}
+			if (top == 2) {
+			    Text gameOver = new Text("GAME OVER");
+			    gameOver.setFill(Color.RED);
+			    gameOver.setStyle("-fx-font: 70 arial;");
+			    gameOver.setY(250);
+			    gameOver.setX(10);
+			    group.getChildren().add(gameOver);
+			    game = false; 
+			}
+			if (top == 15) {
+			    System.exit(0);
+			}
+			if (game) {
+			    MoveDown(object);
+			    scoreText.setText("Score: " + Integer.toString(score));
+			    lines.setText("Lines: " + Integer.toString(numberOfLines));
+			}
+		    });
+		}
+	};
+
+	fall.schedule(task, 0, 300);
+    }
+
+    private void moveOnKeyPressed(Form form) {
+	scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		public void handle(KeyEvent event) {
+		    switch(event.getCode()) {
+		    case RIGHT:
+			Controller.MoveRight(form);
+			break;
+		    case DOWN:
+			MoveDown(form);
+			score++;
+			break;
+		    case LEFT:
+			Controller.MoveLeft(form);
+			break;
+		    case UP:
+			MoveTurn(form);
+			break;
+		    }
+		}
+	    });
+    }
+		     
+	
+		    
+}			       
     
-}
+			
+			    
