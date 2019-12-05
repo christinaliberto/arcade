@@ -19,11 +19,12 @@ import javafx.stage.Stage;
 
 public class Tetris extends Application {
 
+    // Variables 
     public static final int MOVE = 25;
     public static final int SIZE = 25;
     public static int XMAX = SIZE * 12;
     public static int YMAX = SIZE * 24;
-    public static int [][] grid = new int [XMAX/SIZE][YMAX/SIZE];
+    public static int [][] GRID = new int [XMAX/SIZE][YMAX/SIZE];
     private static Pane group = new Pane();
     private static Form object;
     private static Scene scene = new Scene(group, XMAX + 150, YMAX);
@@ -32,9 +33,48 @@ public class Tetris extends Application {
     private static Form newObj = Controller.makeRect();
     private static int numberOfLines = 0;
 
+    // creating scene and starting the game
 
+    public void main(String [] args) {
+	launch(args);
+    }
 
+    @Override
+    public void start(Stage arg0) throws Exception {
 
-    
+	for (int[] a: GRID) {
+	    Arrays.fill(a, 0);
+	}
+
+	// Creating Score and level text
+
+	Line line = new Line (XMAX, 0, XMAX, YMAX);
+	Text scoretext = new Text("Score: ");
+	scoretext.setStyle("-fx-font: 20 arials;");
+	scoretext.setY(50);
+	scoretext.setX(XMAX + 5);
+	Text lines = new Text("Lines: ");
+	lines.setStyle("-fx-font: 20 arials;");
+	lines.setY(100);
+	lines.setX(XMAX + 5);
+	lnes.setFill(Color.RED);
+	group.getChildren().addAll(scoretext, line, lines);
+
+	Form a = nextObj;
+	group.getChildren().addAll(a.a, a.b, a.c, a.d);
+	moveOnKeyPress(a);
+	object a;
+	nextObj = Controller.makeRect();
+	stage.setScene(scene);
+	stage.setTitle("Tetris!");
+	stage.show();
+
+	
+	Timer fall = new Timer();
+	TimerTask task = new TimerTask();
+	publci void run() {
+	    Platform.runLater(new Runnable() {
+		    public void run() {
+			if (object.a.getY() == 0 || object.b.getY() == 0 || object.c.getY() == 0 || object.d.getY() == 0) 
     
 }
