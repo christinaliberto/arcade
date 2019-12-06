@@ -1,9 +1,6 @@
 package cs1302.arcade;
 
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.Region;
+import cs1302.arcade.Tetris;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import java.util.Random;
@@ -111,6 +108,7 @@ public class ArcadeApp extends Application {
     }
 
     public void playTetris() {
+<<<<<<< HEAD
 
 	Stage tetris = new Stage();
         tetris.initModality(Modality.APPLICATION_MODAL);
@@ -166,6 +164,9 @@ public class ArcadeApp extends Application {
 	tetris.setHeight(560);
 	tetris.setScene(scene);
         tetris.show();
+=======
+	Tetris tetris = new Tetris();
+>>>>>>> 6515fb09926dfe24dfc0014591d1ba601df26432
     }
     
     public VBox createMenu() {
