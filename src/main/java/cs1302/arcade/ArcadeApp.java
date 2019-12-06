@@ -39,7 +39,6 @@ import javafx.scene.text.Font;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.shape.Circle;
-
 import javafx.scene.layout.*; 
 
 /**
@@ -141,9 +140,10 @@ public class ArcadeApp extends Application {
         ImageView logo = new ImageView(new Image("https://www2.instantticketcontest.com/TX/Tetris/images/logo-game@2x.png", 150, 150, false, false));
         grid.setPrefSize(300, 600);
         grid.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE); 
-        //adds cols and rows to grid
+
+	//adds cols and rows to grid
         final int numCols = 10;
-        final int numRows = 20;
+	final int numRows = 20;
         for (int i = 0; i < numCols; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setPercentWidth(100.0 / numCols);  
