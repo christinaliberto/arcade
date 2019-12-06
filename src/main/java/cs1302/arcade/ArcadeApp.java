@@ -36,8 +36,7 @@ import javafx.scene.text.Font;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.shape.Circle;
-
-import cs1302.arcade.Tetris;
+import javafx.scene.layout.*; 
 
 /**
  * Application subclass for {@code ArcadeApp}.
@@ -109,6 +108,33 @@ public class ArcadeApp extends Application {
     }
 
     public void playTetris() {
+
+	Stage tetris = new Stage();
+	tetris.initModality(Modality.APPLICATION_MODAL);
+	
+	GridPane grid = new GridPane();
+	grid.setPrefSize(300, 600);
+	final int cols = 10;
+	final int rows = 20;
+	for (int i = 0; i < cols; i++) {
+	    ColumnConstraints constraint = new ColumnConstraints();
+	    constraint.setPercentWidth(100.0/cols);
+	    grid.getColumnConstraints().add(constraint);
+	}
+	for (int i = 0; i < rows; i++) {
+	    RowConstraints rowConst = new RowConstraints();
+	    rowConst.setPercentHeight(100.0 / rows);
+	    grid.getRowConstraints().add(rowConst);
+	}
+	grid.setGridLinesVisible(true);
+	grid.requestFocus(); 
+
+	VBox vbox = new VBox(grid);
+	Scene scene = new Scene(vbox, 500, 500);
+	scene.getStylesheets().add("grid-with-borders.css"); 
+	tetris.setScene(scene);
+	tetris.show(); 
+	  
 	 
     }
 
