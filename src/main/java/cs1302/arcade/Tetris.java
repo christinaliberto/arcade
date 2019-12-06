@@ -45,35 +45,7 @@ public class Tetris extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
-
-        for (int[] a: GRID) {
-            Arrays.fill(a, 0);
-        }
-
-        // Creating Score and level text
-
-        Line line = new Line (XMAX, 0, XMAX, YMAX);
-        Text scoretext = new Text("Score: ");
-        scoretext.setStyle("-fx-font: 20 arials;");
-        scoretext.setY(50);
-        scoretext.setX(XMAX + 5);
-        Text lines = new Text("Lines: ");
-        lines.setStyle("-fx-font: 20 arials;");
-        lines.setY(100);
-        lines.setX(XMAX + 5);
-        lines.setFill(Color.RED);
-        group.getChildren().addAll(scoretext, line, lines);
-
-        Form a = nextObj;
-        group.getChildren().addAll(a.a, a.b, a.c, a.d);
-        moveOnKeyPressed(a);
-        object =  a;
-        nextObj = Controller.makeRect();
-        stage.setScene(scene);
-        stage.setTitle("Tetris!");
-        stage.show();
-	
+    public void run() throws Exception {
         
         Timer fall = new Timer();
 	TimerTask task = new TimerTask() {
