@@ -197,7 +197,6 @@ public class ArcadeApp extends Application {
 	tetris.setHeight(560);
 	tetris.setScene(scene);
         tetris.show();
->>>>>>> f4dc22068bf9df2f0c0b4e3c90abf1cf92b646cd
     }
     
     public VBox createMenu() {
