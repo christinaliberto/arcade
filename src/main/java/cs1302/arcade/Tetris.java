@@ -24,7 +24,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Region;
-
+import cs1302.arcade.*;
 public class Tetris {
 
     private int score = 0;
@@ -67,6 +67,7 @@ public class Tetris {
         tetris.setHeight(560);
         tetris.setScene(scene);
         tetris.show();
+	Form square = new Square(grid);
     } //runTetris
 
     public GridPane makeGrid() {
