@@ -45,20 +45,24 @@ public class Tetris {
         VBox left = new VBox();
         VBox right = new VBox();
         HBox next = new HBox();
+	HBox rules = new HBox();
         left.setSpacing(20);
         next.setAlignment(Pos.CENTER);
-        next.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
-        next.setStyle("-fx-padding: 5;" + "-fx-border-style: solid outside;"
+        next.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+        next.setStyle("-fx-padding: 0;" + "-fx-border-style: solid outside;"
                       + "-fx-border-width: 5;" + "-fx-border-insets: 5;"
                       + "-fx-border-radius: 5;" + "-fx-border-color: red;");
-        Text info = new Text();
+	rules.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+	rules.setStyle("-fx-padding: 0;" + "-fx-border-style: solid outside;"
+                      + "-fx-border-width: 5;" + "-fx-border-insets: 5;"
+                      + "-fx-border-radius: 5;" + "-fx-border-color: red;");
+	Text info = new Text();
         info.setText("SCORE:\n" + score + "\n" + "LEVEL :\n" + level + "\n" + "LINES :\n" + lines);
         info.setFill(Color.RED);
         info.setFont(Font.font("Futura", FontWeight.BOLD, 16));
         next.getChildren().add(info);
-        HBox stats = new HBox();
         ImageView logo = new ImageView(new Image("https://www2.instantticketcontest.com/TX/Tetris/images/logo-game@2x.png", 150, 150, false, false));
-	left.getChildren().addAll(logo, next, stats);
+	left.getChildren().addAll(logo, next, rules);
         right.getChildren().addAll(makeGrid());
         main.getChildren().addAll(left, right);
 	Scene scene = new Scene(main);
@@ -67,21 +71,22 @@ public class Tetris {
         tetris.setHeight(560);
         tetris.setScene(scene);
         tetris.show();
-	Form square = new Square(grid);
+	Square sq = new Square(grid);
     } //runTetris
 
     public GridPane makeGrid() {
 	// creates grid
-	grid.setPrefSize(300, 600);
+	grid.setPrefSize(300, 500);
+	grid.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
 	for (int i = 0; i < 10; i++) {
-            ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setPercentWidth(100.0 / 10);
-            grid.getColumnConstraints().add(colConst);
+            ColumnConstraints col = new ColumnConstraints();
+            col.setPercentWidth(100.0 / 10);
+            grid.getColumnConstraints().add(col);
         } //for
         for (int i = 0; i < 20; i++) {
-            RowConstraints rowConst = new RowConstraints();
-            rowConst.setPercentHeight(100.0 / 20);
-            grid.getRowConstraints().add(rowConst);
+            RowConstraints row = new RowConstraints();
+            row.setPercentHeight(100.0 / 20);
+            grid.getRowConstraints().add(row);
         } //for
         grid.setGridLinesVisible(true);
         grid.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));

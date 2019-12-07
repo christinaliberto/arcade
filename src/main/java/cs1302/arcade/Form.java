@@ -191,11 +191,10 @@ public abstract class Form {
 	}
     }
 
-    public abstract void rotate0();
-    public abstract void rotate90();
-    public abstract void rotate180();
-    public abstract void rotate270();
-
+        public void rotate0() {}                                                                                                                                                       
+    public void rotate90() {}                                                                                                                                                     
+    public void rotate180() {}                                                                                                                                                     
+    public void rotate270() {}
 }
 
 
