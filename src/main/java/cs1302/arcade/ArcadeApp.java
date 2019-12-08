@@ -1,5 +1,6 @@
 package cs1302.arcade;
 
+import cs1302.arcade.Mancala; 
 import cs1302.arcade.Tetris;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -37,6 +38,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.shape.Circle;
 import javafx.scene.layout.*; 
+import javafx.scene.effect.Reflection;
 
 /**
  * Application subclass for {@code ArcadeApp}.
@@ -82,31 +84,8 @@ public class ArcadeApp extends Application {
 
     public void playMancala() {
 
-	Stage mancala = new Stage();
-
-	mancala.initModality(Modality.APPLICATION_MODAL);
-
-
-	Image woodenBoard = new Image("file:resources/wood_background_hd_picture_5_169810.jpg", 800, 800, false, false);
-	BackgroundImage wooden = new BackgroundImage(woodenBoard, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-	Background mancalaBackground = new Background(wooden);
-
-	VBox vbox = new VBox();
-
-	vbox.setBackground(mancalaBackground);
-	
-
-
-	Scene scene = new Scene(vbox, 800, 368);
-	  
-	mancala.setTitle("Mancala");
-	mancala.setWidth(800);
-	mancala.setHeight(368);
-	mancala.setScene(scene);
-	 
-	mancala.show();
+	Mancala mancala = new Mancala();
     }
-
     public void playTetris() {
 
 
@@ -122,9 +101,12 @@ public class ArcadeApp extends Application {
 	welcome.setX(10);
 	welcome.setY(70);
 	welcome.setCache(true);
-	welcome.setText("Welcome to the 530 Coding Queens Aracde!\n" + "        Click the game you want to play");
+	welcome.setText("Welcome to the 530 Coding Queens Arcade!\n\n" + "        Click the game you want to play!");
 	welcome.setFill(Color.HOTPINK);
 	welcome.setFont(Font.font("Futura", FontWeight.BOLD, 20));
+	Reflection r = new Reflection();
+	r.setFraction(0.4f);
+	welcome.setEffect(r); 
 	vbox.setBackground(createBackground());
 	vbox.getChildren().addAll(welcome, games()); 
 	return vbox; 
