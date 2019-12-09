@@ -14,50 +14,47 @@ public class Moves {
     Rectangle s2;
     Rectangle s3;
     Rectangle s4;
-
-    public Moves(Rectangle[] x, GridPane grid, int k, String type, Rectangle a, Rectangle b, Rectangle c, Rectangle d){
-	
+    Rectangle[] shape;
+    GridPane grids;
+    int xint;
+    int yint;
+    
+    public Moves(Rectangle[] x, GridPane grid, int k, int l, String type, Rectangle a, Rectangle b, Rectangle c, Rectangle d){
+	s1= a;
+	s2 = b;
+	s3 = c;
+	s4 = d;
+	shape = x;
+	grids = grid;
+	xint = k;
+	yint = l;
         if (type.equals("down")) {
             //moveDown(shape);                                                                                                                                                    
         } else if (type.equals("right")) {
-            moveRight(x,grid,k);
+            moveRight();
         } else if (type.equals("left")) {
-            moveLeft(x,grid,k);
+            moveLeft();
         }
     }
 
     
-    public void moveLeft(Rectangle[] x, GridPane grid, int k) {
-        valid = true;
-        for (int i = 0; i < 4; i++) {
-	    col = GridPane.getColumnIndex(x[i]);
-	    row = GridPane.getRowIndex(x[i]);
-	    if(col == 0) { 
-		valid = false;
-	    } else {
-	       Rectangle pane = getPane(grid, col - 1, row);
-		if(pane != null && isPiece(pane) == false) {
-		    valid = false;
-		}
-	    }
-        }
-        if (valid) {
-            for( int i = 0; i < 4; i++) {
-		GridPane.setColumnIndex(x[i], GridPane.getColumnIndex(x[i]) - 1);
-	    }
-            k--;
-        }
+    public void moveLeft() {
+	for ( Rectangle s : shape ) {
+	    grids.getChildren().remove(s);
+	    //grids.add(s,(xint-1),yint);
+	    xint--;
+	}
     } //moveleft
 
-    public void moveRight(Rectangle[] x, GridPane grid, int k) {
+    public void moveRight() {
         valid = true;
         for (int i = 0; i < 4; i++) {
-	    col = GridPane.getColumnIndex(x[i]);
-	    row = GridPane.getRowIndex(x[i]);
+	    col = GridPane.getColumnIndex(shape[i]);
+	    row = GridPane.getRowIndex(shape[i]);
 	    if(col == 9) {	
 		valid = false;
 	    } else {
-		Rectangle pane = getPane(grid, col + 1, row);
+		Rectangle pane = getPane(col + 1, row);
 		if(pane != null && isPiece(pane) == false ) {
 		    valid = false;
 		}
@@ -65,16 +62,16 @@ public class Moves {
         }
         if (valid) {
             for( int i = 0; i < 4; i++) {
-                GridPane.setColumnIndex(x[i], GridPane.getColumnIndex(x[i]) + 1);
+                GridPane.setColumnIndex(shape[i], GridPane.getColumnIndex(shape[i]) + 1);
 	    }
-            k++;
+            xint++;
         }
 	
 	
     } // move right
 
-    public Rectangle getPane(GridPane gridPane, int col, int row) {
-	for (Node node : gridPane.getChildren()) {
+    public Rectangle getPane(int col, int row) {
+	for (Node node : grids.getChildren()) {
 	    if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
 		return (Rectangle)node;
 	    }

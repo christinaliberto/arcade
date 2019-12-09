@@ -108,9 +108,7 @@ public class ArcadeApp extends Application {
     }
 
     public void playTetris() {
-
-
-	    Tetris tetris = new Tetris();
+	Tetris tetris = new Tetris();
     }
     
     public VBox createMenu() {
