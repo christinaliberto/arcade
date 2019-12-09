@@ -79,13 +79,11 @@ public class Tetris {
 	left.getChildren().addAll(logo, next, rule);
         right.getChildren().addAll(makeGrid());
 	sq = new Square(grid);
-	sq.move("left",grid);
-	sq.move("left",grid);
-	//setTimeline(1);
+	//setTimeline(level);
 	//tl.play();
-	grid.setOnKeyPressed(createKeyHandler());
 	main.getChildren().addAll(left, right);
 	Scene scene = new Scene(main);
+	scene.setOnKeyPressed(keyHandler());
         tetris.setTitle("Tetris");
         tetris.setWidth(500);
         tetris.setHeight(620);
@@ -112,18 +110,25 @@ public class Tetris {
 	return grid;
     } //makeGrid
 
-    private EventHandler<? super KeyEvent> createKeyHandler() {
+    public EventHandler<? super KeyEvent> keyHandler() {
         return e -> {
-                if (e.getCode() == KeyCode.A) {
-		    System.exit(0);
-		    //sq.move("right",grid);
+                if (e.getCode() == KeyCode.RIGHT) {
+		    System.out.println("right");
+		    sq.move("right",grid);
                 } else if (e.getCode() == KeyCode.LEFT) {
-                    sq.move("left",grid);
-		} //if
+		    System.out.println("left");
+		    sq.move("left",grid);
+		} else if (e.getCode() == KeyCode.DOWN) {
+                    System.out.println("down");
+                    //sq.move("left",grid);
+		}else if (e.getCode() == KeyCode.UP) {
+                    System.out.println("up");
+                    sq.move("up",grid);
+		}
         }; //return
-    } //createKeyHandler
+    } //KeyHandler
 
-    private void setTimeline(int level) {
+    private void setTimeline(int Level) {
 	tl.stop();
 	EventHandler<ActionEvent> handler = e -> {
 	    sq = new Square(grid);    

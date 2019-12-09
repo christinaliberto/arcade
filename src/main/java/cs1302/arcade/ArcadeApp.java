@@ -136,10 +136,6 @@ public class ArcadeApp extends Application {
 	hbox.getChildren().addAll(reversiPic, tetrisPic);
 
 	return hbox;
-    }
-   
-	
-      
-	
+    }	
 
 } // ArcadeApp
