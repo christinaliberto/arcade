@@ -1,5 +1,6 @@
 package cs1302.arcade;
 
+
 import cs1302.arcade.Tetris;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -37,6 +38,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.shape.Circle;
 import javafx.scene.layout.*; 
+import javafx.scene.effect.Reflection;
 
 /**
  * Application subclass for {@code ArcadeApp}.
@@ -45,14 +47,16 @@ import javafx.scene.layout.*;
 
 public class ArcadeApp extends Application {
 
+    Reversi reversiGame = new Reversi();
+    
     Group group = new Group();           // main container
     Random rng = new Random();           // random number generator
     Rectangle r = new Rectangle(20, 20); // some rectangle
 
 
-    private EventHandler<? super MouseEvent> clickMancala() {
+    private EventHandler<? super MouseEvent> clickReversi() {
 	return e -> {
-	    playMancala();
+	    playReversi();
 		};
     }
 
@@ -80,33 +84,14 @@ public class ArcadeApp extends Application {
 
     } // start
 
-    public void playMancala() {
-
-	Stage mancala = new Stage();
-
-	mancala.initModality(Modality.APPLICATION_MODAL);
-
-
-	Image woodenBoard = new Image("file:resources/wood_background_hd_picture_5_169810.jpg", 800, 800, false, false);
-	BackgroundImage wooden = new BackgroundImage(woodenBoard, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-	Background mancalaBackground = new Background(wooden);
-
-	VBox vbox = new VBox();
-
-	vbox.setBackground(mancalaBackground);
+    public void playReversi() {
 	
-
-
-	Scene scene = new Scene(vbox, 800, 368);
-	  
-	mancala.setTitle("Mancala");
-	mancala.setWidth(800);
-	mancala.setHeight(368);
-	mancala.setScene(scene);
-	 
-	mancala.show();
+	Stage playGame = new Stage();
+	playGame.initModality(Modality.APPLICATION_MODAL);
+	reversiGame.start(playGame); 
     }
-
+	
+	
     public void playTetris() {
 	Tetris tetris = new Tetris();
     }
@@ -120,9 +105,12 @@ public class ArcadeApp extends Application {
 	welcome.setX(10);
 	welcome.setY(70);
 	welcome.setCache(true);
-	welcome.setText("Welcome to the 530 Coding Queens Aracde!\n" + "        Click the game you want to play");
+	welcome.setText("Welcome to the 530 Coding Queens Arcade!\n\n" + "        Click the game you want to play!");
 	welcome.setFill(Color.HOTPINK);
 	welcome.setFont(Font.font("Futura", FontWeight.BOLD, 20));
+	Reflection r = new Reflection();
+	r.setFraction(0.4f);
+	welcome.setEffect(r); 
 	vbox.setBackground(createBackground());
 	vbox.getChildren().addAll(welcome, games()); 
 	return vbox; 
@@ -141,11 +129,11 @@ public class ArcadeApp extends Application {
 	HBox hbox = new HBox();
 	hbox.setSpacing(66);
 	hbox.setPadding(new Insets(15, 66, 15, 66));
-	ImageView mancalaPic = new ImageView(new Image("http://iomega-europe.com/wp-content/uploads/2018/01/logo-mancala.png", 150, 150, false, false));
+	ImageView reversiPic = new ImageView(new Image("file:resources/ReversiTeaser.jpg", 150, 150, false, false));
 	ImageView tetrisPic = new ImageView(new Image("https://i-cdn.phonearena.com/images/articles/309604-thumb/tetris-h.jpg", 150, 150, false, false));
-        mancalaPic.setOnMouseClicked(clickMancala());
+        reversiPic.setOnMouseClicked(clickReversi());
 	tetrisPic.setOnMouseClicked(clickTetris()); 
-	hbox.getChildren().addAll(mancalaPic, tetrisPic);
+	hbox.getChildren().addAll(reversiPic, tetrisPic);
 
 	return hbox;
     }
