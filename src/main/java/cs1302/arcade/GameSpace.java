@@ -5,15 +5,13 @@ import javafx.scene.shape.Rectangle;
 
 public class GameSpace extends Rectangle {
 
-    public static final int TILESIZE = 50; 
-
     public GameSpace(int xLoc, int yLoc) {
 
-	setWidth(TILESIZE);
-	setHeight(TILESIZE);
+	setWidth(Reversi.SIZEOFTILES);
+	setHeight(Reversi.SIZEOFTILES);
 	setFill(Color.HOTPINK);
 	setStroke(Color.BLACK);
-	relocate(x * TILESIZE, y * TILESIZE);
+	relocate(xLoc * Reversi.SIZEOFTILES, yLoc * Reversi.SIZEOFTILES);
     }
 }
 

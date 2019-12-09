@@ -1,6 +1,6 @@
 package cs1302.arcade;
 
-import cs1302.arcade.Mancala; 
+
 import cs1302.arcade.Tetris;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -47,14 +47,16 @@ import javafx.scene.effect.Reflection;
 
 public class ArcadeApp extends Application {
 
+    Reversi reversiGame = new Reversi();
+    
     Group group = new Group();           // main container
     Random rng = new Random();           // random number generator
     Rectangle r = new Rectangle(20, 20); // some rectangle
 
 
-    private EventHandler<? super MouseEvent> clickMancala() {
+    private EventHandler<? super MouseEvent> clickReversi() {
 	return e -> {
-	    playMancala();
+	    playReversi();
 		};
     }
 
@@ -82,10 +84,14 @@ public class ArcadeApp extends Application {
 
     } // start
 
-    public void playMancala() {
-
-	Mancala mancala = new Mancala();
+    public void playReversi() {
+	
+	Stage playGame = new Stage();
+	playGame.initModality(Modality.APPLICATION_MODAL);
+	reversiGame.start(playGame); 
     }
+	
+	
     public void playTetris() {
 
 
@@ -125,11 +131,11 @@ public class ArcadeApp extends Application {
 	HBox hbox = new HBox();
 	hbox.setSpacing(66);
 	hbox.setPadding(new Insets(15, 66, 15, 66));
-	ImageView mancalaPic = new ImageView(new Image("http://iomega-europe.com/wp-content/uploads/2018/01/logo-mancala.png", 150, 150, false, false));
+	ImageView reversiPic = new ImageView(new Image("file:resources/ReversiTeaser.jpg", 150, 150, false, false));
 	ImageView tetrisPic = new ImageView(new Image("https://i-cdn.phonearena.com/images/articles/309604-thumb/tetris-h.jpg", 150, 150, false, false));
-        mancalaPic.setOnMouseClicked(clickMancala());
+        reversiPic.setOnMouseClicked(clickReversi());
 	tetrisPic.setOnMouseClicked(clickTetris()); 
-	hbox.getChildren().addAll(mancalaPic, tetrisPic);
+	hbox.getChildren().addAll(reversiPic, tetrisPic);
 
 	return hbox;
     }

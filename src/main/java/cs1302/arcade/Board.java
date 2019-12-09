@@ -42,24 +42,24 @@ public class Board {
     }
 
     public boolean endGame() {
+
 	boolean canMove = false;
-	boolean end = false;
 
 	for (int i = 0; i < 8; i++) {
 	    for (int x = 0; x < 8; x++) {
-		if (gameBoard[i][x] == '*') {
+		if (board[i][x] == '*') {
 		    canMove = true;
 		}
 	    }
 	}
 	if (canMove == false) {
-	    end = true;
+	    return true;
 	}
 	if (returnRemaining() == 0) {
-	    end = true;
+	    return true;
 	}
 
-	return end;
+	return false;
     }
 
     public void scores() {
@@ -81,6 +81,282 @@ public class Board {
 	    }
 	}
     }
+
+    public boolean valid(int xLoc, int yLoc) {
+
+	if (board[xLoc][yLoc] == '*') {
+	    return true;
+	}
+	return false;
+    }
+
+    public void move(Player player, int x, int y) {
+
+	char other = ' ';
+	if (player.getColor() == 'c') {
+	    other = 'w';
+	} else {
+	    other = 'c';
+	}
+
+	board[x][y] = player.getColor();
+
+	int x1 = x;
+	int y1 = y;
+
+	if (x - 1 >= 0 &&  y - 1 >= 0 && board[x - 1][y - 1] == other) {
+	    x--;
+	    y--;
+	    while (x > 0 && y > 0 && board[x][y] == other) {
+		x--;
+		y--;
+	    }
+	    if (x >= 0 && y >= 0 && board[x][y] == player.getColor()) {
+		while (x != x1 - 1 && y != y1 - 1) {
+		    board[++x][++y] = player.getColor();
+		}
+	    }
+	}
+
+	x = x1;
+	y = y1;
+
+	if (x - 1 >= 0 && board[x-1][y] == other) {
+	    x--;
+	}
+	if (x >= 0 && board[x][y] == player.getColor()) {
+	    while (x != x1 - 1) {
+		board[++x][y] = player.getColor();
+	    }
+	}
+
+	x = x1;
+
+	if (x - 1 >= 0 && y + 1 < columns && board[x - 1][y + 1] == other) {
+	    x = x - 1;
+	    y = y + 1;
+	    while (x > 0 && y < columns - 1 && board[x][y] == other) {
+		x--;
+		y++;
+	    }
+	    if (x >= 0 && y < columns && board[x][y] == player.getColor()) {
+		while (x != x1 - 1 && y != y1 + 1) {
+		    board[x++][y--] = player.getColor();
+		}
+	    }
+	}
+
+	x = x1;
+	y = y1;
+	if (y - 1 >= 0 && board[x][y - 1] == other) {
+	    y = y - 1;
+	    while (y > 0 && board[x][y] == other) {
+		y--;
+	    }
+	    if (y >= 0 && board[x][y] == player.getColor()) {
+		while (y != y1 - 1) {
+		    board[x][y++] = player.getColor();
+		}
+	    }
+	}
+
+	y = y1;
+	if (y + 1 < columns && board[x][y + 1] == other) {
+	    y = y + 1;
+	    while (y < columns - 1 && board[x][y] == other) {
+		y++;
+	    }
+	    if (y < columns && board[x][y] == player.getColor()) {
+		while (y != y1 + 1) {
+		    board[x][y--] = player.getColor();
+		}
+	    }
+	}
+	y = y1;
+	if (x + 1 < rows && y - 1 >= 0 && board[x + 1][y - 1] == other) {
+	    x++;
+	    y--;
+	    while (x < rows - 1 && y > 0 && board[x][y] == other) {
+		x++;
+		y--;
+	    }
+	    if (x < rows && y >= 0 && board[x][y] == player.getColor()) {
+		while (x != x1 + 1 && y != y1 - 1) {
+		    board[x--][y++] = player.getColor();
+		}
+	    }
+	}
+
+	x = x1;
+	y = y1;
+
+	if (x + 1 < rows && board[x + 1][y] == other) {
+	    x++;
+	    while (x < rows - 1 && board[x][y] == other) {
+		x++;
+	    }
+	    if (x < rows && board[x][y] == player.getColor()) {
+		while (x != x1 + 1) {
+		    board[x--][y] = player.getColor();
+		}
+	    }
+	}
+
+	x = x1;
+	if (x + 1 < rows && y + 1 < columns && board[x + 1][y + 1] == other) {
+	    x++; y++;
+	    while (x < rows - 1 && y < columns - 1 && board[x][y] == other) {
+		x++; y++;
+	    }
+	    if (x < rows && y < columns && board[x][y] == player.getColor()){
+		while (x != x1 + 1 && y != y1 + 1) {
+		    board[x--][y--] = player.getColor();
+		}
+	    }
+	}
+    }
+
+    public void hint(Player player) {
+
+	char other = ' ';
+	char playerColor = player.getColor();
+	
+	if (player.getColor() == 'c') {
+	    other = 'w';
+	} else {
+	    other = 'c';
+	}
+
+	for (int i = 0; i < 8; i++) {
+	    for (int x = 0; x < 8; x++) {
+		if (board[i][x] == other) {
+		    int i1 = i;
+		    int x1 = x;
+		    if (i - 1 >= 0 && x - 1 >= 0 && board[i - 1][x - 1] == '-') {
+			i = i++;
+			x = x++;
+			while (i < 7 && x < 7 && board[i][x] == other) {
+			    i++;
+			    x++;
+			}
+			if (i <= 7 && x <= 7 && board[i][x] == playerColor) {
+			    board[i1 - 1][x1 - 1] = '*';
+			}
+		    }
+		    i = i1; x = x1;
+		    if (i - 1 >= 0 && board[i -1][x] == '-') {
+			i++;
+			while(i < 7 && board[i][x] == other) {
+			    i++;
+			}
+			if (i <= 7 && board[i][x] == playerColor) {
+			    board[i1 - 1][x1] = '*';
+			}
+		    }
+		    i = i1;
+		    if (i - 1 >= 0 && x + 1 <= 7 && board[i - 1][x + 1] == '-') {
+			i++;
+			x--;
+			while(i < 7 && x > 0 && board[i][x] == other) {
+			    i++; x++;
+			}
+			if (i <= 7 && x >= 0 && board[i][x] == playerColor) {
+			    board[i1 - 1][x1 + 1] = '*';
+			}
+		    }
+		    i = i1;
+		    x = x1;
+
+		    if (x - 1 >= 0 && board[i][x - 1] == '-') {
+			x++;
+			while (x < 7 && board[i][x] == other) {
+			    x++;
+			}
+			if (x <= 7 && board[i][x] == playerColor) {
+			    board[i1][x1 - 1] = '*';
+			}
+		    }
+		    x = x1;
+		    if (x + 1 <= 7 && board[i][x + 1] == '-') {
+			x--;
+			while (x > 0 && board[i][x] == other) {
+			    x--;
+			}
+			if (x >= 0 && board[i][x] == playerColor) {
+			    board[i1][x1 + 1] = '*';
+			}
+		    }
+		    x = x1;
+		    if (i + 1 <= 7 && x - 1 >= 0 && board[i + 1][x-1] == '-') {
+			i--;
+			x++;
+			while (i > 0 && x < 7 && board[i][x] == other) {
+			    i--; x++;
+			}
+			if (i >= 0 && x <= 7 && board[i][x] == playerColor) {
+			    board[i1 + 1][x1 - 1] = '*';
+			}
+		    }
+		    i = i1;
+		    x = x1;
+		    if (i + 1 <= 7 && board[i + 1][x] == '-') {
+			i--;
+			while (i > 0 && board[i][x] == other) {
+			    i--;
+			}
+			if (i >= 0 && board[i][x] == playerColor) {
+			    board[i1 + 1][x1] = '*';
+			}
+		    }
+		    i = i1;
+		    if (i + 1 <= 7 && x + 1 <= 7 && board[i + 1][x + 1] == '-') {
+			i--; x--;
+			while (i > 0 && x > 0 && board[i][x] == other) {
+			    i--; x--;
+			}
+			if (i >= 0 && x >= 0 && board[i][x] == playerColor) {
+			    board[i1 + 1][x1 + 1] = '*';
+			}
+		    }
+		    i = i1;
+		    x = x1;
+		}
+	    }
+	}
+    }
+
+    public void resetBoard() {
+	for (int i = 0; i < rows; i++) {
+	    for (int x = 0; x < columns; x++) {
+		if (board[i][x] == '*') {
+		    board[i][x] = '-';
+		}
+	    }
+	}
+    }
+
+}
+			  
+				
+			
+				
+			       
+				
+				  
+								    
+
+		
+				   
+					     
+	
+	
+	   
+	
+	
+    
+
+    
+     
 	 
     
     
