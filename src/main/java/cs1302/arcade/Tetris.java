@@ -55,7 +55,7 @@ public class Tetris {
         VBox right = new VBox();
         HBox next = new HBox();
 	HBox rule = new HBox();
-        left.setSpacing(20);
+        left.setSpacing(40);
         next.setAlignment(Pos.CENTER);
         next.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
         next.setStyle("-fx-padding: 0;" + "-fx-border-style: solid outside;"
@@ -70,7 +70,7 @@ public class Tetris {
         info.setFill(Color.RED);
         info.setFont(Font.font("Futura", FontWeight.BOLD, 16));
 	Text rules = new Text();
-        rules.setText("CONTROLS \n" + "< to move right \n" + "> to move left \n" + "^ to rotate \n");
+        rules.setText("CONTROLS \n\n" + "⇨ to move right \n\n" + "⇦ to move left \n\n" + "⇧ to rotate \n\n" + "⇩ to move down \n");
         rules.setFill(Color.RED);
         rules.setFont(Font.font("Futura", FontWeight.BOLD, 16));
         next.getChildren().add(info);
@@ -79,8 +79,10 @@ public class Tetris {
 	left.getChildren().addAll(logo, next, rule);
         right.getChildren().addAll(makeGrid());
 	sq = new Square(grid);
-	setTimeline(1);
-	tl.play();
+	sq.move("left",grid);
+	sq.move("left",grid);
+	//setTimeline(1);
+	//tl.play();
 	grid.setOnKeyPressed(createKeyHandler());
 	main.getChildren().addAll(left, right);
 	Scene scene = new Scene(main);
@@ -112,8 +114,9 @@ public class Tetris {
 
     private EventHandler<? super KeyEvent> createKeyHandler() {
         return e -> {
-                if (e.getCode() == KeyCode.RIGHT) {
-                    sq.move("right",grid);
+                if (e.getCode() == KeyCode.A) {
+		    System.exit(0);
+		    //sq.move("right",grid);
                 } else if (e.getCode() == KeyCode.LEFT) {
                     sq.move("left",grid);
 		} //if

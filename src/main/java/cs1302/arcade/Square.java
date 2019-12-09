@@ -172,7 +172,7 @@ public class Square {
     }
 
     public void move(String type, GridPane grid){
-	Moves move = new Moves(shape, grid, x, type, s1, s2, s3, s4);
+	Moves move = new Moves(shape, grid, x, y, type, s1, s2, s3, s4);
     }
 
     public void rotate(){
