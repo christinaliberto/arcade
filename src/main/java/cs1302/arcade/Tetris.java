@@ -114,16 +114,16 @@ public class Tetris {
         return e -> {
                 if (e.getCode() == KeyCode.RIGHT) {
 		    System.out.println("right");
-		    sq.move("right",grid);
+		    sq.move("right");
                 } else if (e.getCode() == KeyCode.LEFT) {
 		    System.out.println("left");
-		    sq.move("left",grid);
+		    sq.move("left");
 		} else if (e.getCode() == KeyCode.DOWN) {
                     System.out.println("down");
                     //sq.move("left",grid);
 		}else if (e.getCode() == KeyCode.UP) {
                     System.out.println("up");
-                    sq.move("up",grid);
+                    sq.move("up");
 		}
         }; //return
     } //KeyHandler
