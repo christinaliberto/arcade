@@ -77,10 +77,7 @@ public class ArcadeApp extends Application {
         stage.setScene(scene);
         stage.sizeToScene();
         stage.show();
-
-        // the group must request input focus to receive key events
-        // @see https://docs.oracle.com/javase/8/javafx/api/javafx/scene/Node.html#requestFocus--
-        group.requestFocus();
+	group.requestFocus();
 
     } // start
 
