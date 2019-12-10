@@ -9,9 +9,11 @@ public class GameSpace extends Rectangle {
 
 	setWidth(Reversi.SIZEOFTILES);
 	setHeight(Reversi.SIZEOFTILES);
-	setFill(Color.HOTPINK);
-	setStroke(Color.BLACK);
+
 	relocate(xLoc * Reversi.SIZEOFTILES, yLoc * Reversi.SIZEOFTILES);
+
+	setFill(Color.HOTPINK);
+	setStroke(Color.WHITE); 
     }
 }
 
