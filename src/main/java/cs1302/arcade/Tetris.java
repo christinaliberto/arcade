@@ -36,6 +36,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+/** creates tetris board and runs movements of shapes. */
+
 public class Tetris {
 
     private Timeline tl = new Timeline();
@@ -45,6 +47,8 @@ public class Tetris {
     private GridPane grid = new GridPane();
     private Square sq;
     private boolean gameOver = false;
+
+    /** creates a tetris game and sets style. */
     
     public Tetris() {
         Stage tetris = new Stage();
@@ -52,11 +56,11 @@ public class Tetris {
         HBox main = new HBox();
         main.setPadding(new Insets(15, 12, 15, 12));
         main.setSpacing(20);
-        Image rainbow = new Image("http://hd-wallpapers.download/free/blocks_rainbow_3d_graphics_background_76559_6000x4000-3000x2000.jpg", 500, 620, false, false);
+        Image rainbow = new Image("file:resources/blocks_rainbow_3d_graphics_background_76559_6000x4000-3000x2000.jpg", 500, 620, false, false);
         BackgroundImage back = new BackgroundImage(rainbow, BackgroundRepeat.NO_REPEAT,
                                                    BackgroundRepeat.NO_REPEAT,
-						   BackgroundPosition.DEFAULT,
-						   BackgroundSize.DEFAULT);
+                                                   BackgroundPosition.DEFAULT,
+                                                   BackgroundSize.DEFAULT);
         Background background = new Background(back);
         main.setBackground(background);
         VBox left = new VBox();
@@ -86,12 +90,12 @@ public class Tetris {
         rules.setFont(Font.font("Futura", FontWeight.BOLD, 16));
         next.getChildren().add(info);
         rule.getChildren().add(rules);
-        ImageView logo = new ImageView(new Image("https://www2.instantticketcontest.com/TX/Tetris/images/logo-game@2x.png", 150, 150, false, false));
+        ImageView logo = new ImageView(new Image("file:resources/logo-game@2x.png", 150, 150, false, false));
         left.getChildren().addAll(logo, next, rule);
         right.getChildren().addAll(makeGrid());
         sq = new Square(grid);
-        setTimeline(level);
-        tl.play();
+        //setTimeline(level);
+        //tl.play();
         main.getChildren().addAll(left, right);
         Scene scene = new Scene(main);
         scene.setOnKeyPressed(keyHandler());
@@ -102,6 +106,10 @@ public class Tetris {
         tetris.show();
     } //runTetris
 
+    /** creates grid. 
+     * @return GridPane
+     */
+    
     public GridPane makeGrid() {
         // creates grid
         grid.setPrefSize(300, 600);
@@ -122,6 +130,10 @@ public class Tetris {
         return grid;
     } //makeGrid
 
+    /** creates responses to key movements. 
+     * @return EventHandler
+     */
+    
     public EventHandler<? super KeyEvent> keyHandler() {
         return e -> {
             if (e.getCode() == KeyCode.RIGHT) {
@@ -136,15 +148,19 @@ public class Tetris {
         }; //return
     } //KeyHandler
 
-    private void setTimeline(int Level) {
+     /** sets timeline for pieces moving down. 
+      * @param level the level
+      */
+    
+    private void setTimeline(int level) {
         tl.stop();
         EventHandler<ActionEvent> handler = e -> {
-            if(sq.down() == false) {
+            if (sq.down() == false) {
                 clearLines();
                 checkGameOver();
-                if(gameOver == false) {
-                  sq = new Square(grid);
-		  score+=10;
+                if (gameOver == false) {
+                    sq = new Square(grid);
+                    score += 10;
                 } //if
             } //if    
         };        
@@ -167,41 +183,45 @@ public class Tetris {
         tl.setCycleCount(Timeline.INDEFINITE);
     } //setTimeline
 
-	private void clearLines() {
+    /**claers lines when row is full. */
+    
+    private void clearLines() {
         int rowsCleared = 0;
-        for(int y = 0; y < 20; y++) {
+        for (int y = 0; y < 20; y++) {
             boolean isFull = true;
             for (int x = 0; x < 10; x++) {
-                if(sq.getFromGrid(x, y) == null) {
+                if (sq.getFromGrid(x, y) == null) {
                     isFull = false;
                 } //if
             } //for
-            if(isFull) {
-		score+= 250;
+            if (isFull) {
+                score += 250;
                 for (int x = 0; x < 10; x++) {
                     Rectangle rect = sq.getFromGrid(x, y);
                     grid.getChildren().remove(rect);
                     for (int k = y; k > 0; k--) {
                         Rectangle top = sq.getFromGrid(x, k - 1);
-                        if(top != null) {
+                        if (top != null) {
                             GridPane.setRowIndex(top, k);
-                        }
-                    }
-                }
-            }
-        }
+                        } //if
+                    } //for
+                } //for
+            } //for
+        } //if
         
-    }
-	
-     private void checkGameOver() {
-        for(int col = 0; col < 10; col++) {
-            if(sq.getFromGrid(col, 0) != null) {
+    } //clear
+
+    /**checks to see if game is over. */
+    
+    private void checkGameOver() {
+        for (int col = 0; col < 10; col++) {
+            if (sq.getFromGrid(col, 0) != null) {
                 tl.stop();
                 gameOver = true;
-                Alert alert = new Alert(AlertType.INFORMATION,
+                Alert alert = new Alert(AlertType.NONE,
                                         "GAME OVER!\n"  +
                                         "Final score: " + score);
-		alert.show();
+                alert.show();
                 
             }
         }
