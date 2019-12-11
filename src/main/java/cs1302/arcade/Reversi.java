@@ -152,11 +152,11 @@ public void validMoves() {
 
 
         if (reversiBoard.getPlayer1Score() > reversiBoard.getPlayer2Score()) {
-            scoresTurn.setText("                         GAME OVER!\n\n\n                         Player 1 Wins!");
+            scoresTurn.setText("                           GAME OVER!\n\n\n                         Player 1 Wins!");
         } else if (reversiBoard.getPlayer2Score() > reversiBoard.getPlayer1Score()) {
-            scoresTurn.setText("                         GAME OVER!\n\n\n                         Player 2 Wins!");
+            scoresTurn.setText("                          GAME OVER!\n\n\n                         Player 2 Wins!");
         } else {
-            scoresTurn.setText("                         GAME OVER!\n\n\n                         It's a Tie!");
+            scoresTurn.setText("                          GAME OVER!\n\n\n                         It's a Tie!");
         }
 
 
