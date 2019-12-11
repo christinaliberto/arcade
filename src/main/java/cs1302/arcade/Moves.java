@@ -87,9 +87,11 @@ public class Moves {
     public void moveDown() {
 	int col, row;
         boolean canMove = true;
-        for(Rectangle r : shape) {
+	System.out.println(shape[0] + " " + shape[0] + " " + shape[0] + " " + shape[0]);
+	for(Rectangle r : shape) {
             if(r != null) {
-                col = GridPane.getColumnIndex(r);
+		System.out.println("yes");
+		col = GridPane.getColumnIndex(r);
                 row = GridPane.getRowIndex(r);
                 if(row == 19) { 
                     canMove = false;
@@ -106,8 +108,12 @@ public class Moves {
 	if(canMove) {
 	    yint++;
 	    for(Rectangle r : shape) {
-		GridPane.setRowIndex(r, row + 1);
-		
+		if(r != null) {
+		    System.out.println("YES");
+		    row = GridPane.getRowIndex(r);
+		    GridPane.setRowIndex(r, row + 1);
+		    
+		}
 	    }
 	}
     }
