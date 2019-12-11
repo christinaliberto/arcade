@@ -108,6 +108,7 @@ public class Square {
         s2 = new Rectangle(30,30);
         s3 = new Rectangle(30,30);
         s4 = new Rectangle(30,30);
+        current = Color.HOTPINK;
         s1.setFill(Color.HOTPINK); //color
         s2.setFill(Color.HOTPINK);
         s3.setFill(Color.HOTPINK);

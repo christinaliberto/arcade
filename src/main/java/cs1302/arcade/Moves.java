@@ -165,7 +165,7 @@ public class Moves {
                     
                 } //if
             } //for
-            System.out.println(shape[0] +"," +shape[1]+","+shape[2]+","+shape[3]);
+            
         } //if
 
     } //moveleft
@@ -200,7 +200,7 @@ public class Moves {
 
                 }
             }
-            System.out.println(shape[0] +"," +shape[1]+","+shape[2]+","+shape[3]);
+            
         }
         
     } // move right
@@ -666,10 +666,10 @@ public class Moves {
     
     public void t1() {
         try {
-            if (getPane(xint - 2, yint + 1) == null) {
+            if (getPane(xint, yint + 1) == null) {
                 grids.getChildren().remove(s4);
-                s4 = addNewRect(xint - 2, yint + 1);
-                update();
+                s4 = addNewRect(xint, yint + 1);
+                shape[3] = s4;
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -681,18 +681,14 @@ public class Moves {
     
     public void t2() {
         try {
-            Rectangle next2 = getPane(xint, yint + 1);
-            Rectangle next3 = getPane(xint, yint + 2);
-            Rectangle next4 = getPane(xint, yint + 3);
-            if (next2 == null && next3 == null && next4 == null) {
-                remove();
-                s2 = addNewRect(xint, yint + 1);
-                s3 = addNewRect(xint, yint + 2);
-                s4 = addNewRect(xint, yint + 3);
+            if (getPane(xint - 1, yint) == null) {
+                grids.getChildren().remove(s2);
+                s2 = addNewRect(xint - 1, yint);
+                shape[1] = s2;
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
-            int nothing = 0; //for checkstyle no empty block
+            int nothing = 0; //for checkstyle no empty block                          
         }
     } //rotations
     
@@ -700,18 +696,14 @@ public class Moves {
     
     public void t3() {
         try {
-            Rectangle next2 = getPane(xint, yint + 1);
-            Rectangle next3 = getPane(xint, yint + 2);
-            Rectangle next4 = getPane(xint, yint + 3);
-            if (next2 == null && next3 == null && next4 == null) {
-                remove();
-                s2 = addNewRect(xint, yint + 1);
-                s3 = addNewRect(xint, yint + 2);
-                s4 = addNewRect(xint, yint + 3);
+            if (getPane(xint, yint - 1) == null) {
+                grids.getChildren().remove(s3);
+                s3 = addNewRect(xint, yint - 1);
+                shape[2] = s3;
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
-            int nothing = 0; //for checkstyle no empty block
+            int nothing = 0; //for checkstyle no empty block 
         }
     } //rotations
     
@@ -719,19 +711,16 @@ public class Moves {
     
     public void t4() {
         try {
-            Rectangle next2 = getPane(xint, yint + 1);
-            Rectangle next3 = getPane(xint, yint + 2);
-            Rectangle next4 = getPane(xint, yint + 3);
-            if (next2 == null && next3 == null && next4 == null) {
-                remove();
-                s2 = addNewRect(xint, yint + 1);
-                s3 = addNewRect(xint, yint + 2);
-                s4 = addNewRect(xint, yint + 3);
+            if (getPane(xint, yint + 1) == null) {
+                grids.getChildren().remove(s4);
+                s4 = addNewRect(xint, yint + 1);
+                shape[3] = s4;
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
             int nothing = 0; //for checkstyle no empty block
         }
+
     } //rotations
 
     /** rotates tetromino to desired position. */
