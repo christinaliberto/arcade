@@ -1,6 +1,5 @@
 package cs1302.arcade;
 
-
 import cs1302.arcade.Tetris;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -47,23 +46,24 @@ import javafx.scene.effect.Reflection;
 
 public class ArcadeApp extends Application {
 
+    // declare and initialize variables
     Reversi reversiGame = new Reversi();
     
     Group group = new Group();           // main container
     Random rng = new Random();           // random number generator
     Rectangle r = new Rectangle(20, 20); // some rectangle
-
-
+ 
+    
     private EventHandler<? super MouseEvent> clickReversi() {
         return e -> {
             playReversi();
-                };
+        };
     }
 
     private EventHandler<? super MouseEvent> clickTetris() {
         return e -> {
             playTetris();
-                };
+        };
     }
 
     /** {@inheritDoc} */
@@ -102,7 +102,8 @@ public class ArcadeApp extends Application {
         welcome.setX(10);
         welcome.setY(70);
         welcome.setCache(true);
-        welcome.setText("Welcome to the 530 Coding Queens Arcade!\n\n" + "        Click the game you want to play!");
+        welcome.setText("Welcome to the 530 Coding Queens Arcade!\n\n"
+                        + "        Click the game you want to play!");
         welcome.setFill(Color.HOTPINK);
         welcome.setFont(Font.font("Futura", FontWeight.BOLD, 20));
         Reflection r = new Reflection();
@@ -115,9 +116,14 @@ public class ArcadeApp extends Application {
 
     public Background createBackground() {
 
-        Image crownImage = new Image("https://i.pinimg.com/originals/b9/84/75/b984750467f7b4b000f03977cc1d2ca4.jpg", 500, 500, false, false);
-        BackgroundImage crowns = new BackgroundImage(crownImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        Background mainBackground = new Background(crowns);
+        Image gameBackground = new Image("file:resources/b984750467f7b4b000f03977cc1d2ca4.jpg",
+                                         500, 500, false, false);
+        BackgroundImage bg = new BackgroundImage(gameBackground, BackgroundRepeat.NO_REPEAT,
+                                                 BackgroundRepeat.NO_REPEAT,
+                                                 BackgroundPosition.DEFAULT,
+                                                 BackgroundSize.DEFAULT);
+        Background mainBackground = new Background(bg);
+
 
         return mainBackground;
     }
@@ -126,8 +132,12 @@ public class ArcadeApp extends Application {
         HBox hbox = new HBox();
         hbox.setSpacing(66);
         hbox.setPadding(new Insets(15, 66, 15, 66));
-        ImageView reversiPic = new ImageView(new Image("file:resources/ReversiTeaser.jpg", 150, 150, false, false));
-        ImageView tetrisPic = new ImageView(new Image("https://i-cdn.phonearena.com/images/articles/309604-thumb/tetris-h.jpg", 150, 150, false, false));
+        ImageView reversiPic = new ImageView(new
+                                             Image("file:resources/ReversiTeaser.jpg", 150,
+                                                   150, false, false));
+        ImageView tetrisPic = new ImageView(new
+                                            Image("file:resources/tetris-h.jpg", 150,
+                                                  150, false, false));
         reversiPic.setOnMouseClicked(clickReversi());
         tetrisPic.setOnMouseClicked(clickTetris()); 
         hbox.getChildren().addAll(reversiPic, tetrisPic);

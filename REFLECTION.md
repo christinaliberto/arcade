@@ -60,4 +60,20 @@ that the Markdown is transformed into nice looking HTML.
    however, we were able to overcome this. We also ran into some issues with some
    of the graphical interface portion for tetris. These are all things we were able to
    overcome, or have a solution to do so in the upcoming days.
-   
+
+## WED 2019-12-11 @ 3:30 PM EST
+
+1. **DONE:** Completed implementation of both games, as well as java docs for each
+   class created and in line documentation. Attributions were updated for all
+   outside sources, and each game is fully functioning.
+
+2. **TODO:** NA
+
+3. **PROB:** With tetris, we had some trouble getting the rotations and key pressed
+   action events to work, however we discovered a null array that was causing
+   this issue. For reversi, we had trouble with finding the possible spaces a
+   player could move and determining which spaces flipped after a player moved.
+   However, after rereading the rules of reversi and playing the game a few times
+   online, we discovered that one needs to check in all 8 possible directions surrounding
+   a singular game piece on the board to determine both things, as well as to check for
+   the opponent's game piece placement as well as the player's itself.
