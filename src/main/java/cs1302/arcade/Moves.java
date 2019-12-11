@@ -157,7 +157,7 @@ public class Moves {
         } //for
 
         if (canMove) {
-            xint++;
+            xint--;
             for (Rectangle r : shape) {
                 if (r != null) {
                     col = GridPane.getColumnIndex(r);
