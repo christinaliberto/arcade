@@ -63,7 +63,7 @@ public class Moves {
     
     public void direction( String type) {
         if (type.equals("down")) {
-            moveDown();          
+            moveToBottom();          
         } else if (type.equals("right")) {
             moveRight();
         } else if (type.equals("left")) {
@@ -88,7 +88,7 @@ public class Moves {
 
     /**  moves the tetrimino down one row. */
     
-    public void moveDown() {
+    public boolean moveDown() {
 	int col, row;
         boolean canMove = true;
 	for(Rectangle r : shape) {
@@ -117,9 +117,13 @@ public class Moves {
 		}
 	    }
 	}
+	return canMove;
     }
         
-
+     public void moveToBottom() {
+        while(moveDown() == true);
+    }
+    
     /**  moves the tetrimino  left one column. */
     
     public void moveLeft() {
@@ -142,7 +146,7 @@ public class Moves {
         }
 
         if(canMove) {
-            yint++;
+            xint++;
             for(Rectangle r : shape) {
                 if(r != null) {
                     col = GridPane.getColumnIndex(r);
@@ -176,7 +180,7 @@ public class Moves {
         }
 
         if(canMove) {
-            yint++;
+            xint++;
             for(Rectangle r : shape) {
                 if(r != null) {
                     col = GridPane.getColumnIndex(r);
