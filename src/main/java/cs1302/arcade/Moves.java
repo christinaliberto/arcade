@@ -150,11 +150,11 @@ public class Moves {
                     Rectangle next = getPane(col - 1, row);
                     if (next != null && isPiece(next) == false) {
                         canMove = false;
-                    }
+                    } //if
 
-                }
-            }
-        }
+                } //if
+            } //if
+        } //for
 
         if (canMove) {
             xint++;
@@ -163,10 +163,10 @@ public class Moves {
                     col = GridPane.getColumnIndex(r);
                     GridPane.setColumnIndex(r, col - 1);
                     
-                }
-            }
-            update();
-        }
+                } //if
+            } //for
+            System.out.println(shape[0] +"," +shape[1]+","+shape[2]+","+shape[3]);
+        } //if
 
     } //moveleft
 
@@ -192,7 +192,7 @@ public class Moves {
         }
 
         if (canMove) {
-            xint++;
+            xint--;
             for (Rectangle r : shape) {
                 if (r != null) {
                     col = GridPane.getColumnIndex(r);
@@ -200,8 +200,9 @@ public class Moves {
 
                 }
             }
+            System.out.println(shape[0] +"," +shape[1]+","+shape[2]+","+shape[3]);
         }
-
+        
     } // move right
 
     /** returns the value of a pane on the grid.
