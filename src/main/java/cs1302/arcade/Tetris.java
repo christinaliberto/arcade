@@ -31,6 +31,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Region;
 import cs1302.arcade.*;
+
 public class Tetris {
 
     private Timeline tl = new Timeline();
@@ -42,48 +43,54 @@ public class Tetris {
     private boolean win = false;
     
     public Tetris() {
-	Stage tetris = new Stage();
+        Stage tetris = new Stage();
         tetris.initModality(Modality.APPLICATION_MODAL);
         HBox main = new HBox();
         main.setPadding(new Insets(15, 12, 15, 12));
         main.setSpacing(20);
         Image rainbow = new Image("http://hd-wallpapers.download/free/blocks_rainbow_3d_graphics_background_76559_6000x4000-3000x2000.jpg", 500, 620, false, false);
-        BackgroundImage back = new BackgroundImage(rainbow, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        BackgroundImage back = new BackgroundImage(rainbow, BackgroundRepeat.NO_REPEAT,
+                                                   BackgroundRepeat.NO_REPEAT,
+						   BackgroundPosition.DEFAULT,
+						   BackgroundSize.DEFAULT);
         Background background = new Background(back);
         main.setBackground(background);
         VBox left = new VBox();
         VBox right = new VBox();
         HBox next = new HBox();
-	HBox rule = new HBox();
+        HBox rule = new HBox();
         left.setSpacing(40);
         next.setAlignment(Pos.CENTER);
-        next.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+        next.setBackground(new Background(new BackgroundFill(Color.BLACK,
+                                                             CornerRadii.EMPTY, Insets.EMPTY)));
         next.setStyle("-fx-padding: 0;" + "-fx-border-style: solid outside;"
                       + "-fx-border-width: 5;" + "-fx-border-insets: 5;"
                       + "-fx-border-radius: 5;" + "-fx-border-color: red;");
-	rule.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-	rule.setStyle("-fx-padding: 0;" + "-fx-border-style: solid outside;"
+        rule.setBackground(new Background(new BackgroundFill(Color.BLACK,
+                                                             CornerRadii.EMPTY, Insets.EMPTY)));
+        rule.setStyle("-fx-padding: 0;" + "-fx-border-style: solid outside;"
                       + "-fx-border-width: 5;" + "-fx-border-insets: 5;"
                       + "-fx-border-radius: 5;" + "-fx-border-color: red;");
-	Text info = new Text();
+        Text info = new Text();
         info.setText("SCORE:\n" + score + "\n" + "LEVEL :\n" + level + "\n" + "LINES :\n" + lines);
         info.setFill(Color.RED);
         info.setFont(Font.font("Futura", FontWeight.BOLD, 16));
-	Text rules = new Text();
-        rules.setText("CONTROLS \n\n" + "⇨ to move right \n\n" + "⇦ to move left \n\n" + "⇧ to rotate \n\n" + "⇩ to move down \n");
+        Text rules = new Text();
+        rules.setText("CONTROLS \n\n" + "⇨ to move right \n\n"
+                      + "⇦ to move left \n\n" + "⇧ to rotate \n\n" + "⇩ to move down \n");
         rules.setFill(Color.RED);
         rules.setFont(Font.font("Futura", FontWeight.BOLD, 16));
         next.getChildren().add(info);
-	rule.getChildren().add(rules);
+        rule.getChildren().add(rules);
         ImageView logo = new ImageView(new Image("https://www2.instantticketcontest.com/TX/Tetris/images/logo-game@2x.png", 150, 150, false, false));
-	left.getChildren().addAll(logo, next, rule);
+        left.getChildren().addAll(logo, next, rule);
         right.getChildren().addAll(makeGrid());
-	sq = new Square(grid);
-	//setTimeline(level);
-	//tl.play();
-	main.getChildren().addAll(left, right);
-	Scene scene = new Scene(main);
-	scene.setOnKeyPressed(keyHandler());
+        sq = new Square(grid);
+        //setTimeline(level);
+        //tl.play();
+        main.getChildren().addAll(left, right);
+        Scene scene = new Scene(main);
+        scene.setOnKeyPressed(keyHandler());
         tetris.setTitle("Tetris");
         tetris.setWidth(500);
         tetris.setHeight(620);
@@ -92,10 +99,10 @@ public class Tetris {
     } //runTetris
 
     public GridPane makeGrid() {
-	// creates grid
-	grid.setPrefSize(300, 600);
-	grid.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-	for (int i = 0; i < 10; i++) {
+        // creates grid
+        grid.setPrefSize(300, 600);
+        grid.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+        for (int i = 0; i < 10; i++) {
             ColumnConstraints col = new ColumnConstraints();
             col.setPercentWidth(100.0 / 10);
             grid.getColumnConstraints().add(col);
@@ -106,35 +113,32 @@ public class Tetris {
             grid.getRowConstraints().add(row);
         } //for
         grid.setGridLinesVisible(true);
-        grid.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-	return grid;
+        grid.setBackground(new Background(new BackgroundFill(Color.BLACK,
+                                                             CornerRadii.EMPTY, Insets.EMPTY)));
+        return grid;
     } //makeGrid
 
     public EventHandler<? super KeyEvent> keyHandler() {
         return e -> {
-                if (e.getCode() == KeyCode.RIGHT) {
-		    System.out.println("right");
-		    sq.move("right");
-                } else if (e.getCode() == KeyCode.LEFT) {
-		    System.out.println("left");
-		    sq.move("left");
-		} else if (e.getCode() == KeyCode.DOWN) {
-                    System.out.println("down");
-                    //sq.move("left",grid);
-		}else if (e.getCode() == KeyCode.UP) {
-                    System.out.println("up");
-                    sq.move("up");
-		}
+            if (e.getCode() == KeyCode.RIGHT) {
+                sq.move("right");
+            } else if (e.getCode() == KeyCode.LEFT) {
+                sq.move("left");
+            } else if (e.getCode() == KeyCode.DOWN) {
+                sq.move("down");
+            } else if (e.getCode() == KeyCode.UP) {
+                sq.move("up");
+            }
         }; //return
     } //KeyHandler
 
     private void setTimeline(int Level) {
-	tl.stop();
-	EventHandler<ActionEvent> handler = e -> {
-	    sq = new Square(grid);    
+        tl.stop();
+        EventHandler<ActionEvent> handler = e -> {
+            sq = new Square(grid);    
         };        
-	KeyFrame k;
-        switch(level) {
+        KeyFrame k;
+        switch (level) {
         case 1:
             k = new KeyFrame(Duration.millis(800), handler);
             break;

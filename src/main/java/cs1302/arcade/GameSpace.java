@@ -7,13 +7,13 @@ public class GameSpace extends Rectangle {
 
     public GameSpace(int xLoc, int yLoc) {
 
-	setWidth(Reversi.SIZEOFTILES);
-	setHeight(Reversi.SIZEOFTILES);
+        setWidth(Reversi.SIZEOFTILES);
+        setHeight(Reversi.SIZEOFTILES);
 
-	relocate(xLoc * Reversi.SIZEOFTILES, yLoc * Reversi.SIZEOFTILES);
+        relocate(xLoc * Reversi.SIZEOFTILES, yLoc * Reversi.SIZEOFTILES);
 
-	setFill(Color.HOTPINK);
-	setStroke(Color.WHITE); 
+        setFill(Color.HOTPINK);
+        setStroke(Color.WHITE); 
     }
 }
 

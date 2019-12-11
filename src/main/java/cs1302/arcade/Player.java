@@ -5,15 +5,15 @@ public class Player {
    public char color;
 
     public Player (char color) {
-	this.color = color;
+        this.color = color;
     }
 
     public void setColor(char color) {
-	this.color = color;
+        this.color = color;
     }
 
     public char getColor() {
-	return color;
+        return color;
     }
 
 }
