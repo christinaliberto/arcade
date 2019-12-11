@@ -1,5 +1,6 @@
 package cs1302.arcade;
 
+
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 import javafx.animation.Timeline;
@@ -31,6 +32,9 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Region;
 import cs1302.arcade.*;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class Tetris {
 
@@ -40,7 +44,7 @@ public class Tetris {
     private int lines = 0;
     private GridPane grid = new GridPane();
     private Square sq;
-    private boolean win = false;
+    private boolean gameOver = false;
     
     public Tetris() {
         Stage tetris = new Stage();
@@ -86,8 +90,8 @@ public class Tetris {
         left.getChildren().addAll(logo, next, rule);
         right.getChildren().addAll(makeGrid());
         sq = new Square(grid);
-        //setTimeline(level);
-        //tl.play();
+        setTimeline(level);
+        tl.play();
         main.getChildren().addAll(left, right);
         Scene scene = new Scene(main);
         scene.setOnKeyPressed(keyHandler());
@@ -135,7 +139,14 @@ public class Tetris {
     private void setTimeline(int Level) {
         tl.stop();
         EventHandler<ActionEvent> handler = e -> {
-            sq = new Square(grid);    
+            if(sq.down() == false) {
+                clearLines();
+                checkGameOver();
+                if(gameOver == false) {
+                  sq = new Square(grid);
+		  score+=10;
+                } //if
+            } //if    
         };        
         KeyFrame k;
         switch (level) {
@@ -154,5 +165,45 @@ public class Tetris {
         tl.getKeyFrames().clear();
         tl.getKeyFrames().add(k);
         tl.setCycleCount(Timeline.INDEFINITE);
-    } //setTimeline 
+    } //setTimeline
+
+	private void clearLines() {
+        int rowsCleared = 0;
+        for(int y = 0; y < 20; y++) {
+            boolean isFull = true;
+            for (int x = 0; x < 10; x++) {
+                if(sq.getFromGrid(x, y) == null) {
+                    isFull = false;
+                } //if
+            } //for
+            if(isFull) {
+		score+= 250;
+                for (int x = 0; x < 10; x++) {
+                    Rectangle rect = sq.getFromGrid(x, y);
+                    grid.getChildren().remove(rect);
+                    for (int k = y; k > 0; k--) {
+                        Rectangle top = sq.getFromGrid(x, k - 1);
+                        if(top != null) {
+                            GridPane.setRowIndex(top, k);
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+	
+     private void checkGameOver() {
+        for(int col = 0; col < 10; col++) {
+            if(sq.getFromGrid(col, 0) != null) {
+                tl.stop();
+                gameOver = true;
+                Alert alert = new Alert(AlertType.INFORMATION,
+                                        "GAME OVER!\n"  +
+                                        "Final score: " + score);
+                
+            }
+        }
+    }
+    
 } //tetris class 

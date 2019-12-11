@@ -215,5 +215,16 @@ public class Square {
         move.direction(type);
     } //move 
 
+    public boolean down() {
+	if(move.moveDown() == false) {
+	    return false;
+	} else {
+	    return true;
+	}
+    }
+
+    public Rectangle getFromGrid( int col, int row) {
+	 return move.getPane( col, row);
+    }
 
 } //square
