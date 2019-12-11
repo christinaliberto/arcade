@@ -19,7 +19,7 @@ public class Moves {
     Rectangle s6;
     Rectangle s7;
     Rectangle s8;
-    public Rectangle[] shape = { s1, s2, s3, s4 };
+    Rectangle[] shape = { s1, s2, s3, s4 };
     GridPane grids;
     int xint;
     int yint;
@@ -98,13 +98,18 @@ public class Moves {
                     if(next != null && isPiece(next) == false) {
                         canMove = false;
                     }
-		    if(canMove) {
-			GridPane.setRowIndex(r, row + 1);
-			yint++;
-		    }
+		    
                 }
             }
         }
+
+	if(canMove) {
+	    yint++;
+	    for(Rectangle r : shape) {
+		GridPane.setRowIndex(r, row + 1);
+		
+	    }
+	}
     }
         
 
