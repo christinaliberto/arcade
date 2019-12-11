@@ -53,6 +53,9 @@ public class ArcadeApp extends Application {
     Random rng = new Random();           // random number generator
     Rectangle r = new Rectangle(20, 20); // some rectangle
  
+    /** click event for reversi.
+     * @return EventHandler
+     */
     
     private EventHandler<? super MouseEvent> clickReversi() {
         return e -> {
@@ -60,6 +63,10 @@ public class ArcadeApp extends Application {
         };
     }
 
+    /** click event for tetris.
+     * @return EventHandler
+     */
+    
     private EventHandler<? super MouseEvent> clickTetris() {
         return e -> {
             playTetris();
@@ -81,18 +88,25 @@ public class ArcadeApp extends Application {
 
     } // start
 
+    /** starts reversi app. */
+    
     public void playReversi() {
         
         Stage playGame = new Stage();
         playGame.initModality(Modality.APPLICATION_MODAL);
         reversiGame.start(playGame); 
     }
-        
-        
+
+    /**starts tetris app. */
+    
     public void playTetris() {
         Tetris tetris = new Tetris();
     }
-    
+
+    /** creates menu.
+     * @return VBox
+     */
+        
     public VBox createMenu() {
         
         VBox vbox = new VBox();
@@ -114,6 +128,10 @@ public class ArcadeApp extends Application {
         return vbox; 
     }
 
+    /** makes background.
+     * @return Background
+     */
+    
     public Background createBackground() {
 
         Image gameBackground = new Image("file:resources/b984750467f7b4b000f03977cc1d2ca4.jpg",
@@ -124,10 +142,13 @@ public class ArcadeApp extends Application {
                                                  BackgroundSize.DEFAULT);
         Background mainBackground = new Background(bg);
 
-
         return mainBackground;
     }
-
+    
+    /** makes game buttons.
+     * @return HBox
+     */
+    
     public HBox games() {
         HBox hbox = new HBox();
         hbox.setSpacing(66);

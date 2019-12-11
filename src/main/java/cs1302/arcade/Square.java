@@ -29,7 +29,7 @@ public class Square {
     
     public Square(GridPane grid) {
         String[] tetromino = {"sq","I","J","L","T","S","Z"}; //all possible tetrominos
-        int r = (int)(Math.random() * 7); //to choose random tetromino
+        int r = (int)(Math.random() * 7); //to choose random tetromnio
         if (tetromino[r].equals("sq")) {
             sq(grid);
             identity = "sq";
@@ -69,7 +69,7 @@ public class Square {
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
-        y = 5;
+        y = 0;
         grid.add(s1,x,y);
         grid.add(s2,x + 1,y);
         grid.add(s3,x,y + 1);
@@ -91,7 +91,7 @@ public class Square {
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
-        y = 5;
+        y = 0;
         grid.add(s1,x,y);
         grid.add(s2,x + 1,y);
         grid.add(s3,x + 2,y);
@@ -112,7 +112,7 @@ public class Square {
         s2.setFill(Color.HOTPINK);
         s3.setFill(Color.HOTPINK);
         s4.setFill(Color.HOTPINK);
-        y = 5;
+        y = 1;
         grid.add(s1,x,y);
         grid.add(s2,x,y - 1);
         grid.add(s3,x + 1,y);
@@ -134,7 +134,7 @@ public class Square {
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
-        y = 5;
+        y = 1;
         grid.add(s1,x,y);
         grid.add(s2,x - 1,y);
         grid.add(s3,x - 1,y - 1);
@@ -156,7 +156,7 @@ public class Square {
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
-        y = 5;
+        y = 1;
         grid.add(s1, x, y);
         grid.add(s2, x + 1, y);
         grid.add(s3, x + 1, y - 1);
@@ -178,7 +178,7 @@ public class Square {
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
-        y = 5;
+        y = 1;
         grid.add(s1, x, y);
         grid.add(s2, x, y - 1);
         grid.add(s3, x + 1, y - 1);
@@ -200,7 +200,7 @@ public class Square {
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
-        y = 5;
+        y = 1;
         grid.add(s1, x, y);
         grid.add(s2, x, y - 1);
         grid.add(s3, x - 1, y - 1);
