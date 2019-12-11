@@ -69,7 +69,11 @@ that the Markdown is transformed into nice looking HTML.
 
 2. **TODO:** NA
 
-3. **PROB:** With tetris, we had some trouble getting the rotations and key pressed
+3. **PROB:** We decided to switch to Reversi
+   instead of sticking with Mancala, as we were having trouble with the horizontal
+   translations required for mancala. I think overall we both understood the rules
+   of Reversi better, but it did take some time to figure out the recursion
+   portion of this game. With tetris, we had some trouble getting the rotations and key pressed
    action events to work, however we discovered a null array that was causing
    this issue. For reversi, we had trouble with finding the possible spaces a
    player could move and determining which spaces flipped after a player moved.
