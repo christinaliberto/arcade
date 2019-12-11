@@ -48,7 +48,7 @@ public class Tetris {
         HBox main = new HBox();
         main.setPadding(new Insets(15, 12, 15, 12));
         main.setSpacing(20);
-        Image rainbow = new Image("http://hd-wallpapers.download/free/blocks_rainbow_3d_graphics_background_76559_6000x4000-3000x2000.jpg", 500, 620, false, false);
+        Image rainbow = new Image("file:resources/blocks_rainbow_3d_graphics_background_76559_6000x4000-3000x2000.jpg", 500, 620, false, false);
         BackgroundImage back = new BackgroundImage(rainbow, BackgroundRepeat.NO_REPEAT,
                                                    BackgroundRepeat.NO_REPEAT,
 						   BackgroundPosition.DEFAULT,
@@ -82,7 +82,7 @@ public class Tetris {
         rules.setFont(Font.font("Futura", FontWeight.BOLD, 16));
         next.getChildren().add(info);
         rule.getChildren().add(rules);
-        ImageView logo = new ImageView(new Image("https://www2.instantticketcontest.com/TX/Tetris/images/logo-game@2x.png", 150, 150, false, false));
+        ImageView logo = new ImageView(new Image("file:resources/logo-game@2x.png", 150, 150, false, false));
         left.getChildren().addAll(logo, next, rule);
         right.getChildren().addAll(makeGrid());
         sq = new Square(grid);
