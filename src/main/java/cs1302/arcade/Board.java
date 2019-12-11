@@ -52,26 +52,20 @@ public class Board {
     }
 
     public boolean endGame() {
-
-        boolean canMove = false;
-
-        for (int i = 0; i < 8; i++) {
-            for (int x = 0; x < 8; x++) {
-                if (board[i][x] == '*') {
-                    canMove = true;
-                }
-            }
-        }
-        if (canMove == false) {
-            return true;
-        }
-
-	if (returnRemaining() == 0) {
-
+	boolean valid = false; 
+	for (int i = 0; i < rows; i++) {
+	    for (int x = 0; x < columns; x++) {
+		if (board[i][x] == '*') {
+		    valid = true;
+		}
+	    }
+	}
+	if (valid == false || returnRemaining() == 0) {
 	    return true;
-        }
-
-        return false;
+	} else {
+	    return false;
+	}
+        
     }
 
     public void scores() {
@@ -102,16 +96,13 @@ public class Board {
         return false;
     }
 
-       public void move(Player player, int x, int y) {
-           board[x][y] = player.color; 
-       }
-    
-
     public void hint(Player player) {
 
         for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                northHint(row, col, player);
+
+	    for (int col = 0; col < 8; col++) {
+
+		northHint(row, col, player);
                 northEastHint(row, col, player);
                 eastHint(row, col, player);
                 southEastHint(row, col, player);
@@ -124,12 +115,25 @@ public class Board {
          
     }
 
-
     public void flip(int x, int y, Player player) {
 
 	board[x][y] = player.color;
+
+	flip1(x, y, player);
+	flip2(x, y, player);
+	flip3(x, y, player);
+	flip4(x, y, player);
+	flip5(x, y, player);
+	flip6(x, y, player);
+	flip7(x, y, player);
+	flip8(x, y, player);
+    }
+
+
+    public void flip1(int x, int y, Player player) {
 	
 	char opp = '?';
+
 	if (player.color == 'c') {
 	    opp = 'w';
 	} else {
@@ -152,10 +156,20 @@ public class Board {
 		}
 	    }
 	}
+    }
 
-	x = X;
-	y = Y;
+    public void flip2(int x, int y, Player player) {
 
+	char opp = '?';
+	if (player.color == 'c') {
+	    opp = 'w';
+	} else {
+	    opp = 'c';
+	}
+	
+	int X = x;
+	int Y = y;
+	
 	if (x - 1 >= 0 && board[x - 1][y] == opp) {
 	    x = x - 1;
 	    while (x > 0 && board[x][y] == opp) {
@@ -167,36 +181,75 @@ public class Board {
 		}
 	    }
 	}
+    }
 
-	x = X;
+    public void flip3(int x, int y, Player player) {
+
+	char opp = '?';
+
+	if (player.color == 'c') {
+	    opp = 'w';
+	} else {
+	    opp = 'c';
+	}
+
+	int X = x;
+	int Y = y; 
+	
 	if (x - 1 >= 0 && y + 1 < columns && board[x - 1][y + 1] == opp) {
 	    x = x - 1;
 	    y = y + 1;
 	    while (x > 0 && y < columns - 1 && board[x][y] == opp) {
-		if (x >= 0 && y < columns && board[x][y] == player.color) {
-		    while (x != X - 1 && y != Y + 1) {
-			board[++x][--y] = player.color;
+		x--;
+		y++;
+	    }
+	    if (x >= 0 && y < columns && board[x][y] == player.color) {
+		while (x != X - 1 && y != Y + 1) {
+		    board[++x][--y] = player.color;
+		}
+	    }
+	}
+    }
+
+
+    public void flip4(int x, int y, Player player){
+	
+	char opp = '?';
+	
+	if (player.color == 'c') {
+		opp = 'w';
+	} else {
+	    opp = 'c';
+	}
+	
+	int X = x;
+	    int Y = y; 
+	    
+	    if (y - 1 >= 0 && board[x][y - 1] == opp) {
+		y = y - 1;
+		while (y > 0 && board[x][y] == opp)  {
+		    y--;
+		}
+		if (y >= 0 && board[x][y] == player.color)  {
+		    while (y != Y - 1) {
+			board[x][++y] = player.color;
 		    }
 		}
 	    }
+    }
+    
+    public void flip5(int x, int y, Player player) {
+	
+	char opp = '?';
+	if (player.color == 'c') {
+	    opp = 'w';
+	} else {
+	    opp = 'c';
 	}
-
-	x = X;
-	y = Y;
-
-	if (y - 1 >= 0 && board[x][y - 1] == opp) {
-	    y = y - 1;
-	    while (y > 0 && board[x][y] == opp)  {
-		y--;
-	    }
-	    if (y >= 0 && board[x][y] == player.color)  {
-		while (y != Y - 1) {
-		    board[x][++y] = player.color;
-		}
-	    }
-	}
-	y = Y;
-
+	    
+	int X = x;
+	int Y = y; 
+	
 	if (y + 1 < columns && board[x][y + 1] == opp) {
 	    y = y + 1;
 	    while (y < columns - 1 && board[x][y] == opp) {
@@ -207,9 +260,21 @@ public class Board {
 		    board[x][--y] = player.color;
 		}
 	    }
+	    }
+    }
+    
+    public void flip6(int x, int y, Player player) {
+	
+	char opp = '?';
+	if (player.color == 'c') {
+	    opp = 'w';
+	} else {
+		opp = 'c';
 	}
-	y = Y;
-
+	
+	int X = x;
+	int Y = y; 
+	
 	if (x + 1 < rows && y - 1 >= 0 && board[x + 1][y - 1] == opp) {
 	    x = x + 1;
 	    y = y - 1;
@@ -223,9 +288,20 @@ public class Board {
 		}
 	    }
 	}
-
-	x = X;
-	y = Y;
+    }
+    
+    public void flip7(int x, int y, Player player) {
+	
+	char opp = '?';
+	if (player.color == 'c') {
+	    opp = 'w';
+	} else {
+	    opp = 'c';
+	}
+	
+	int X = x;
+	int Y = y;
+	
 	if (x + 1 < rows && board[x + 1][y] == opp) {
 	    x = x + 1;
 	    while (x < rows - 1 && board[x][y] == opp)  {
@@ -237,8 +313,20 @@ public class Board {
 		}
 	    }
 	}
-	x = X;
-
+    }
+    
+    public void flip8(int x, int y, Player player) {
+	
+	char opp = '?';
+	if (player.color == 'c') {
+	    opp = 'w';
+	} else {
+	    opp = 'c';
+	}
+	
+	int X = x;
+	int Y = y;
+	
 	if (x + 1 < rows && y + 1 < columns && board[x + 1][y + 1] == opp) {
 	    x = x + 1;
 	    y = y + 1;
@@ -253,9 +341,9 @@ public class Board {
 	    }
 	}
     }
+	
     
-								       
-						   
+    
     public void resetBoard() {
 
         for (int i = 0; i < rows; i++) {
@@ -466,6 +554,7 @@ public class Board {
     }
 
     public void southWestHint(int row, int col, Player player) {
+
         char p = '?';
         char opp = '?';
 
@@ -501,16 +590,7 @@ public class Board {
         return (row < 8 && row >= 0 && col >=0 && col < 8);
     }
 
-    public void printBoard() {
-	for (int i = 0; i < 8; i++) {
-	    //System.out.print(i);
-	    for (int x = 0; x < 8; x++)  {
-		System.out.print(board[i][x]);
-	    }
-	    System.out.println();
-	}
-	
-    }
+    
 }               
                           
                                 

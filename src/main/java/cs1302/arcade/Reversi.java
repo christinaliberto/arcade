@@ -15,6 +15,8 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Background;
 import javafx.scene.input.MouseEvent; 
+import javafx.geometry.Pos; 
+
 public class Reversi extends Application {
 
     public static final int BOARDWIDTH = 8;
@@ -44,10 +46,8 @@ public class Reversi extends Application {
 
 	player1 = new Player('c');
 	player2 = new Player('w');
-
 	turn = player1;  
-	//reversiBoard.initializeGameBoard(); 
-    }
+ }
     
     public void createScores() {
 	
@@ -56,7 +56,7 @@ public class Reversi extends Application {
 	Background scoreBack = new Background(fill);
 	playerScores.setBackground(scoreBack);
 	
-	scoresTurn = new Text("                    It's Player 1's turn!\n" + "\n                         Player 1: " + reversiBoard.getPlayer1Score() + "\n                         Player 2: " + reversiBoard.getPlayer2Score());
+	scoresTurn = new Text("                    It's Player 1's turn!\n"  + "\n                         Player 1: " + reversiBoard.getPlayer1Score() + "\n                         Player 2: " + reversiBoard.getPlayer2Score()); 
 	scoresTurn.setFill(Color.RED);
 	scoresTurn.setFont(Font.font("Futura", FontWeight.BOLD, 16));
 	
@@ -65,10 +65,10 @@ public class Reversi extends Application {
 
     public void updateScores() {
 
-	if (turn  == player1) {
-	    scoresTurn.setText("                    It's player 2's turn!\n" + "\n                         Player 1: " + reversiBoard.getPlayer1Score() + "\n                         Player 2: " + reversiBoard.getPlayer2Score());
+	if (turn  == player2) {
+	    scoresTurn.setText("                    It's Player 2's turn!\n" + "\n                         Player 1: " + reversiBoard.getPlayer1Score() + "\n                         Player 2: " + reversiBoard.getPlayer2Score());
 	} else {
-	    scoresTurn.setText("                    It's player 1's turn!\n" + "\n                         Player 1: " + reversiBoard.getPlayer1Score() + "\n                         Player 2: " + reversiBoard.getPlayer2Score());
+	    scoresTurn.setText("                    It's Player 1's turn!\n" + "\n                         Player 1: " + reversiBoard.getPlayer1Score() + "\n                         Player 2: " + reversiBoard.getPlayer2Score());
 	}
     }
 
@@ -101,6 +101,7 @@ public void initialPieces() {
 }
 
 public void validMoves() {
+
     for (int i = 0; i < 8; i++) {
 	for (int x = 0; x < 8; x++) {
 	    if (reversiBoard.valid(i, x)) {
@@ -141,12 +142,13 @@ public void validMoves() {
     public void createGameOver()  {
 
 	if (reversiBoard.getPlayer1Score() > reversiBoard.getPlayer2Score()) {
-	    scoresTurn.setText("                    GAME OVER!\n                          Player 1 Wins!");
+	    scoresTurn.setText("                           GAME OVER!\n" + "\n                          Player 1 Wins!\n\n");
 	} else if (reversiBoard.getPlayer2Score() > reversiBoard.getPlayer1Score()) {
-	    scoresTurn.setText("                    GAME OVER!\n                          Player 2 Wins!");
+	    scoresTurn.setText("                           GAME OVER!\n" + "\n                          Player 2 Wins!\n\n");
 	} else {
-	    scoresTurn.setText("                    GAME OVER!\n                            It's a Tie!");
+	    scoresTurn.setText("                           GAME OVER!\n" + "\n                          It's a Tie!\n\n");
 	}
+ 
     }
     
    
@@ -187,20 +189,19 @@ public void start (Stage stage) {
 			reversiBoard.scores();
 			validMoves();
 			updateScores();
-		    } else if (reversiBoard.endGame()) {
-			createGameOver();
-			reversiBoard.resetScore();
-			reversiBoard.initializeGameBoard();
-			initializePlayers();
-			reversiBoard.hint(player1);
-			validMoves(); 
+			if (reversiBoard.endGame()) {
+			    createGameOver();
+			    reversiBoard.resetScore();
+			     
+			}
 		    }
 		});
 	}
     }
-
+    
     initialPieces();
     reversiV.getChildren().addAll(gameSpaces);
+    reversiBoard.resetScore(); 
     createScores();
     reversiV.getChildren().add(playerScores);
     
@@ -214,6 +215,7 @@ public void start (Stage stage) {
     
     reversiBoard.initializeGameBoard();
     initializePlayers();
+    
     reversiBoard.hint(player1); 
     validMoves(); 
     
