@@ -6,7 +6,7 @@ import javafx.scene.shape.Rectangle;
 public class GameSpace extends Rectangle {
 
     public GameSpace(int xLoc, int yLoc) {
-
+	int x = 0;
         setWidth(Reversi.SIZEOFTILES);
         setHeight(Reversi.SIZEOFTILES);
 

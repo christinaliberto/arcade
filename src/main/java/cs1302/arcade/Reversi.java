@@ -22,7 +22,7 @@ public class Reversi extends Application {
     public static final int BOARDWIDTH = 8;
     public static final int BOARDHEIGHT = 8;
     public static final int SIZEOFTILES = 50;
-    
+    int x = 0;
 
     Player player1, player2, turn;
     

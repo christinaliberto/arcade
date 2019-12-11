@@ -19,7 +19,7 @@ public class Moves {
     Rectangle s6;
     Rectangle s7;
     Rectangle s8;
-    Rectangle[] shape = { s1, s2, s3, s4 };
+    Rectangle[] shape = new Rectangle[4] ;
     GridPane grids;
     int xint;
     int yint;
@@ -46,6 +46,10 @@ public class Moves {
         s2 = b;
         s3 = c;
         s4 = d;
+	shape[0] = s1;
+	shape[1] = s2;
+	shape[2] = s3;
+	shape[3] = s4;
         grids = grid;
         xint = k;
         yint = l;
@@ -87,10 +91,8 @@ public class Moves {
     public void moveDown() {
 	int col, row;
         boolean canMove = true;
-	System.out.println(shape[0] + " " + shape[0] + " " + shape[0] + " " + shape[0]);
 	for(Rectangle r : shape) {
             if(r != null) {
-		System.out.println("yes");
 		col = GridPane.getColumnIndex(r);
                 row = GridPane.getRowIndex(r);
                 if(row == 19) { 
@@ -109,7 +111,6 @@ public class Moves {
 	    yint++;
 	    for(Rectangle r : shape) {
 		if(r != null) {
-		    System.out.println("YES");
 		    row = GridPane.getRowIndex(r);
 		    GridPane.setRowIndex(r, row + 1);
 		    
@@ -122,13 +123,69 @@ public class Moves {
     /**  moves the tetrimino  left one column. */
     
     public void moveLeft() {
-                
+	 int col, row;
+        boolean canMove = true;
+        for(Rectangle r : shape) {
+            if(r != null) {
+		col = GridPane.getColumnIndex(r);
+                row = GridPane.getRowIndex(r);
+                if(row == 19) {
+                    canMove = false;
+                } else {
+                    Rectangle next = getPane(col - 1, row);
+                    if(next != null && isPiece(next) == false) {
+                        canMove = false;
+                    }
+
+		}
+            }
+        }
+
+        if(canMove) {
+            yint++;
+            for(Rectangle r : shape) {
+                if(r != null) {
+                    col = GridPane.getColumnIndex(r);
+                    GridPane.setColumnIndex(r, col - 1);
+
+                }
+            }
+        }
+
     } //moveleft
 
     /**  moves the tetrimino  right one column. */
 
     public void moveRight() {
-        
+	 int col, row;
+        boolean canMove = true;
+        for(Rectangle r : shape) {
+            if(r != null) {
+		col = GridPane.getColumnIndex(r);
+                row = GridPane.getRowIndex(r);
+                if(row == 19) {
+                    canMove = false;
+                } else {
+                    Rectangle next = getPane(col + 1, row);
+                    if(next != null && isPiece(next) == false) {
+                        canMove = false;
+                    }
+
+		}
+            }
+        }
+
+        if(canMove) {
+            yint++;
+            for(Rectangle r : shape) {
+                if(r != null) {
+                    col = GridPane.getColumnIndex(r);
+                    GridPane.setColumnIndex(r, col + 1);
+
+                }
+            }
+        }
+
     } // move right
 
     /** returns the value of a pane on the grid.
