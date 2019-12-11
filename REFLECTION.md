@@ -61,7 +61,7 @@ that the Markdown is transformed into nice looking HTML.
    of the graphical interface portion for tetris. These are all things we were able to
    overcome, or have a solution to do so in the upcoming days.
 
-## WED 2019-12-11 @ 3:30 PN EST
+## WED 2019-12-11 @ 3:30 PM EST
 
 1. **DONE:** Completed implementation of both games, as well as java docs for each
    class created and in line documentation. Attributions were updated for all
