@@ -201,6 +201,7 @@ public class Tetris {
                 Alert alert = new Alert(AlertType.INFORMATION,
                                         "GAME OVER!\n"  +
                                         "Final score: " + score);
+		alert.show();
                 
             }
         }
