@@ -55,15 +55,15 @@ public class ArcadeApp extends Application {
 
 
     private EventHandler<? super MouseEvent> clickReversi() {
-	return e -> {
-	    playReversi();
-		};
+        return e -> {
+            playReversi();
+                };
     }
 
     private EventHandler<? super MouseEvent> clickTetris() {
-	return e -> {
-	    playTetris();
-		};
+        return e -> {
+            playTetris();
+                };
     }
 
     /** {@inheritDoc} */
@@ -72,67 +72,67 @@ public class ArcadeApp extends Application {
 
         
         
-      	Scene scene = new Scene(createMenu(), 500, 500);
-	stage.setTitle("cs1302-arcade!");
+        Scene scene = new Scene(createMenu(), 500, 500);
+        stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
         stage.sizeToScene();
         stage.show();
-	group.requestFocus();
+        group.requestFocus();
 
     } // start
 
     public void playReversi() {
-	
-	Stage playGame = new Stage();
-	playGame.initModality(Modality.APPLICATION_MODAL);
-	reversiGame.start(playGame); 
+        
+        Stage playGame = new Stage();
+        playGame.initModality(Modality.APPLICATION_MODAL);
+        reversiGame.start(playGame); 
     }
-	
-	
+        
+        
     public void playTetris() {
-	Tetris tetris = new Tetris();
+        Tetris tetris = new Tetris();
     }
     
     public VBox createMenu() {
-	
-	VBox vbox = new VBox();
-	vbox.setSpacing(120);
-	vbox.setPadding(new Insets(10, 10, 10, 10));
-	Text welcome = new Text();
-	welcome.setX(10);
-	welcome.setY(70);
-	welcome.setCache(true);
-	welcome.setText("Welcome to the 530 Coding Queens Arcade!\n\n" + "        Click the game you want to play!");
-	welcome.setFill(Color.HOTPINK);
-	welcome.setFont(Font.font("Futura", FontWeight.BOLD, 20));
-	Reflection r = new Reflection();
-	r.setFraction(0.4f);
-	welcome.setEffect(r); 
-	vbox.setBackground(createBackground());
-	vbox.getChildren().addAll(welcome, games()); 
-	return vbox; 
+        
+        VBox vbox = new VBox();
+        vbox.setSpacing(120);
+        vbox.setPadding(new Insets(10, 10, 10, 10));
+        Text welcome = new Text();
+        welcome.setX(10);
+        welcome.setY(70);
+        welcome.setCache(true);
+        welcome.setText("Welcome to the 530 Coding Queens Arcade!\n\n" + "        Click the game you want to play!");
+        welcome.setFill(Color.HOTPINK);
+        welcome.setFont(Font.font("Futura", FontWeight.BOLD, 20));
+        Reflection r = new Reflection();
+        r.setFraction(0.4f);
+        welcome.setEffect(r); 
+        vbox.setBackground(createBackground());
+        vbox.getChildren().addAll(welcome, games()); 
+        return vbox; 
     }
 
     public Background createBackground() {
 
-	Image crownImage = new Image("https://i.pinimg.com/originals/b9/84/75/b984750467f7b4b000f03977cc1d2ca4.jpg", 500, 500, false, false);
-	BackgroundImage crowns = new BackgroundImage(crownImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-	Background mainBackground = new Background(crowns);
+        Image crownImage = new Image("https://i.pinimg.com/originals/b9/84/75/b984750467f7b4b000f03977cc1d2ca4.jpg", 500, 500, false, false);
+        BackgroundImage crowns = new BackgroundImage(crownImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background mainBackground = new Background(crowns);
 
-	return mainBackground;
+        return mainBackground;
     }
 
     public HBox games() {
-	HBox hbox = new HBox();
-	hbox.setSpacing(66);
-	hbox.setPadding(new Insets(15, 66, 15, 66));
-	ImageView reversiPic = new ImageView(new Image("file:resources/ReversiTeaser.jpg", 150, 150, false, false));
-	ImageView tetrisPic = new ImageView(new Image("https://i-cdn.phonearena.com/images/articles/309604-thumb/tetris-h.jpg", 150, 150, false, false));
+        HBox hbox = new HBox();
+        hbox.setSpacing(66);
+        hbox.setPadding(new Insets(15, 66, 15, 66));
+        ImageView reversiPic = new ImageView(new Image("file:resources/ReversiTeaser.jpg", 150, 150, false, false));
+        ImageView tetrisPic = new ImageView(new Image("https://i-cdn.phonearena.com/images/articles/309604-thumb/tetris-h.jpg", 150, 150, false, false));
         reversiPic.setOnMouseClicked(clickReversi());
-	tetrisPic.setOnMouseClicked(clickTetris()); 
-	hbox.getChildren().addAll(reversiPic, tetrisPic);
+        tetrisPic.setOnMouseClicked(clickTetris()); 
+        hbox.getChildren().addAll(reversiPic, tetrisPic);
 
-	return hbox;
-    }	
+        return hbox;
+    }   
 
 } // ArcadeApp
