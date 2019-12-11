@@ -49,14 +49,9 @@ public class Reversi extends Application {
         player2 = new Player('w');
 
         turn = player1;  
-        //reversiBoard.initializeGameBoard(); 
+      
     }
-
-	player1 = new Player('c');
-	player2 = new Player('w');
-	turn = player1;  
- }
-
+ 
     
     public void createScores() {
         
@@ -72,31 +67,17 @@ public class Reversi extends Application {
         
         playerScores.getChildren().add(scoresTurn);
 
-	Background scoreBack = new Background(fill);
-	playerScores.setBackground(scoreBack);
-	
-	scoresTurn = new Text("                    It's Player 1's turn!\n"  + "\n                         Player 1: " + reversiBoard.getPlayer1Score() + "\n                         Player 2: " + reversiBoard.getPlayer2Score()); 
-	scoresTurn.setFill(Color.RED);
-	scoresTurn.setFont(Font.font("Futura", FontWeight.BOLD, 16));
-	
-	playerScores.getChildren().add(scoresTurn);
 
     }
 
     public void updateScores() {
 
 
-        if (turn  == player1) {
+        if (turn  == player2) {
             scoresTurn.setText("                    It's player 2's turn!\n" + "\n                         Player 1: " + reversiBoard.getPlayer1Score() + "\n                         Player 2: " + reversiBoard.getPlayer2Score());
         } else {
             scoresTurn.setText("                    It's player 1's turn!\n" + "\n                         Player 1: " + reversiBoard.getPlayer1Score() + "\n                         Player 2: " + reversiBoard.getPlayer2Score());
         }
-
-	if (turn  == player2) {
-	    scoresTurn.setText("                    It's Player 2's turn!\n" + "\n                         Player 1: " + reversiBoard.getPlayer1Score() + "\n                         Player 2: " + reversiBoard.getPlayer2Score());
-	} else {
-	    scoresTurn.setText("                    It's Player 1's turn!\n" + "\n                         Player 1: " + reversiBoard.getPlayer1Score() + "\n                         Player 2: " + reversiBoard.getPlayer2Score());
-	}
 
     }
 
@@ -171,21 +152,13 @@ public void validMoves() {
 
 
         if (reversiBoard.getPlayer1Score() > reversiBoard.getPlayer2Score()) {
-            scoresTurn.setText("                    GAME OVER!\n                          Player 1 Wins!");
+            scoresTurn.setText("                         GAME OVER!\n\n\n                         Player 1 Wins!");
         } else if (reversiBoard.getPlayer2Score() > reversiBoard.getPlayer1Score()) {
-            scoresTurn.setText("                    GAME OVER!\n                          Player 2 Wins!");
+            scoresTurn.setText("                         GAME OVER!\n\n\n                         Player 2 Wins!");
         } else {
-            scoresTurn.setText("                    GAME OVER!\n                            It's a Tie!");
+            scoresTurn.setText("                         GAME OVER!\n\n\n                         It's a Tie!");
         }
 
-	if (reversiBoard.getPlayer1Score() > reversiBoard.getPlayer2Score()) {
-	    scoresTurn.setText("                           GAME OVER!\n" + "\n                          Player 1 Wins!\n\n");
-	} else if (reversiBoard.getPlayer2Score() > reversiBoard.getPlayer1Score()) {
-	    scoresTurn.setText("                           GAME OVER!\n" + "\n                          Player 2 Wins!\n\n");
-	} else {
-	    scoresTurn.setText("                           GAME OVER!\n" + "\n                          It's a Tie!\n\n");
-	}
- 
 
     }
 
@@ -215,40 +188,6 @@ public void start (Stage stage) {
 
     for (int i = 0; i < 8; i++) {
 
-        for(int x = 0; x < 8; x++) {
-            space = new GameSpace(i, x);
-            gameBoard[i][x] = space;
-            gameSpaces.getChildren().add(gameBoard[i][x]);
-            
-            gameBoard[i][x].setOnMouseClicked(e -> {
-                    // System.out.println(e);
-
-                    click1 = (int)(e.getSceneY()/SIZEOFTILES);
-                    click2 = (int)(e.getSceneX()/SIZEOFTILES);
-
-                    if (reversiBoard.valid(click2, click1)) {
-
-                        reversiBoard.flip(click2, click1, turn);
-                        
-                        setPiece(turn.color);
-
-                        reversiBoard.resetBoard();
-                        playerSwitch();
-                        reversiBoard.hint(turn);
-                        reversiBoard.scores();
-                        validMoves();
-                        updateScores();
-                    } else if (reversiBoard.endGame()) {
-                        createGameOver();
-                        reversiBoard.resetScore();
-                        reversiBoard.initializeGameBoard();
-                        initializePlayers();
-                        reversiBoard.hint(player1);
-                        validMoves(); 
-                    }
-                });
-        }
-
 	for(int x = 0; x < 8; x++) {
 	    space = new GameSpace(i, x);
 	    gameBoard[i][x] = space;
@@ -260,18 +199,18 @@ public void start (Stage stage) {
 		    click2 = (int)(e.getSceneX()/SIZEOFTILES);
 
 		    if (reversiBoard.valid(click2, click1)) {
-
 			reversiBoard.flip(click2, click1, turn);
 			recurseReversi(); 
+
 			if (reversiBoard.endGame()) {
 			    createGameOver();
 			    reversiBoard.resetScore();
-			     
+			    
 			}
 		    }
 		});
 	}
-
+	
     }
     
     initialPieces();
@@ -282,9 +221,9 @@ public void start (Stage stage) {
     reversiV.getChildren().add(playerScores);
     
     Scene scene = new Scene(reversiV, 400, 475);
-
+    
     stage.setTitle("Reversi");
-
+    
     stage.setScene(scene);
     stage.sizeToScene(); 
     stage.show();
