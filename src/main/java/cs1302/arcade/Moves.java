@@ -69,6 +69,15 @@ public class Moves {
         }
     }
 
+    /** updates the shape array after new rectangles are added. */
+    
+    public void update() {
+        shape[0] = s1;
+        shape[1] = s2;
+        shape[2] = s3;
+        shape[3] = s4;
+    }
+    
     /** adds a new rectangle to the grid.
      * @param row the row
      * @param col the column
@@ -153,9 +162,10 @@ public class Moves {
                 if (r != null) {
                     col = GridPane.getColumnIndex(r);
                     GridPane.setColumnIndex(r, col - 1);
-
+                    
                 }
             }
+            update();
         }
 
     } //moveleft
@@ -357,6 +367,7 @@ public class Moves {
                 s2 = addNewRect(xint, yint + 1);
                 s3 = addNewRect(xint, yint + 2);
                 s4 = addNewRect(xint, yint + 3);
+                update();
                 rotations++;
             } //if
         } catch (IndexOutOfBoundsException e) {
@@ -376,6 +387,7 @@ public class Moves {
                 s2 = addNewRect(xint - 1, yint);
                 s3 = addNewRect(xint - 2, yint);
                 s4 = addNewRect(xint - 3, yint);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -395,6 +407,7 @@ public class Moves {
                 s2 = addNewRect(xint, yint - 1);
                 s3 = addNewRect(xint, yint - 2);
                 s4 = addNewRect(xint, yint - 3);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -414,6 +427,7 @@ public class Moves {
                 s2 = addNewRect(xint + 1, yint);
                 s3 = addNewRect(xint + 2, yint);
                 s4 = addNewRect(xint + 3, yint);
+                update();
                 rotations = 0;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -433,6 +447,7 @@ public class Moves {
                 s2 = addNewRect(xint, yint + 1);
                 s3 = addNewRect(xint, yint - 1);
                 s4 = addNewRect(xint + 1, yint - 1);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -452,6 +467,7 @@ public class Moves {
                 s2 = addNewRect(xint - 1, yint);
                 s3 = addNewRect(xint + 1, yint);
                 s4 = addNewRect(xint + 1, yint + 1);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -471,6 +487,7 @@ public class Moves {
                 s2 = addNewRect(xint, yint - 1);
                 s3 = addNewRect(xint, yint + 1);
                 s4 = addNewRect(xint - 1, yint + 1);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -490,6 +507,7 @@ public class Moves {
                 s2 = addNewRect(xint + 1, yint);
                 s3 = addNewRect(xint - 1, yint);
                 s4 = addNewRect(xint - 1, yint - 1);
+                update();
                 rotations = 0;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -509,6 +527,7 @@ public class Moves {
                 s2 = addNewRect(xint, yint - 1);
                 s3 = addNewRect(xint, yint + 1);
                 s4 = addNewRect(xint + 1, yint + 1);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -528,6 +547,7 @@ public class Moves {
                 s2 = addNewRect(xint + 1, yint);
                 s3 = addNewRect(xint - 1, yint);
                 s4 = addNewRect(xint - 1, yint + 1);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -547,6 +567,7 @@ public class Moves {
                 s2 = addNewRect(xint, yint + 1);
                 s3 = addNewRect(xint, yint - 1);
                 s4 = addNewRect(xint - 1, yint - 1);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -578,10 +599,11 @@ public class Moves {
     public void s1() {
         try {
             if (getPane(xint + 1, yint + 1) == null && getPane(xint + 1, yint) == null) {
-                remove();
-                s2 = addNewRect(xint, yint);
+                grids.getChildren().remove(s3);
+                grids.getChildren().remove(s4);
                 s3 = addNewRect(xint + 1, yint);
                 s4 = addNewRect(xint + 1, yint + 1);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -594,9 +616,9 @@ public class Moves {
     public void s2() {
         try {
             if (getPane(xint - 1, yint + 1) == null && getPane(xint, yint + 1) == null) {
-                remove();
+                grids.getChildren().remove(s2);
+                grids.getChildren().remove(s4);
                 s2 = addNewRect(xint, yint + 1);
-                s3 = addNewRect(xint, yint);
                 s4 = addNewRect(xint - 1, yint + 1);
                 rotations++;
             }
@@ -610,10 +632,11 @@ public class Moves {
     public void s3() {
         try {
             if (getPane(xint - 1, yint - 1) == null && getPane(xint - 1, yint) == null) {
-                remove();
-                s2 = addNewRect(xint, yint);
+                grids.getChildren().remove(s3);
+                grids.getChildren().remove(s4);
                 s3 = addNewRect(xint - 1, yint - 1);
                 s4 = addNewRect(xint - 1, yint);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -626,10 +649,11 @@ public class Moves {
     public void s4() {
         try {
             if (getPane(xint, yint - 1) == null && getPane(xint + 1, yint - 1) == null) {
-                remove();
+                grids.getChildren().remove(s3);
+                grids.getChildren().remove(s2);
                 s2 = addNewRect(xint, yint - 1);
                 s3 = addNewRect(xint + 1, yint - 1);
-                s4 = addNewRect(xint, yint);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -641,14 +665,10 @@ public class Moves {
     
     public void t1() {
         try {
-            Rectangle next2 = getPane(xint, yint);
-            Rectangle next3 = getPane(xint, yint);
-            Rectangle next4 = getPane(xint, yint);
-            if (next2 == null && next3 == null && next4 == null) {
-                remove();
-                s2 = addNewRect(xint, yint);
-                s3 = addNewRect(xint, yint);
-                s4 = addNewRect(xint, yint);
+            if (getPane(xint - 2, yint + 1) == null) {
+                grids.getChildren().remove(s4);
+                s4 = addNewRect(xint - 2, yint + 1);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -718,10 +738,11 @@ public class Moves {
     public void z1() {
         try {
             if (getPane(xint, yint + 1) == null && getPane(xint + 1, yint - 1) == null) {
-                remove();
+                grids.getChildren().remove(s3);
+                grids.getChildren().remove(s2);
                 s2 = addNewRect(xint, yint + 1);
                 s3 = addNewRect(xint + 1, yint - 1);
-                s4 = addNewRect(xint, yint);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -734,10 +755,11 @@ public class Moves {
     public void z2() {
         try {
             if (getPane(xint - 1, yint) == null && getPane(xint + 1, yint + 1) == null) {
-                remove();
-                s2 = addNewRect(xint, yint);
+                grids.getChildren().remove(s3);
+                grids.getChildren().remove(s4);
                 s3 = addNewRect(xint + 1, yint + 1);
                 s4 = addNewRect(xint - 1, yint);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -750,10 +772,11 @@ public class Moves {
     public void z3() {
         try {
             if (getPane(xint, yint - 1) == null && getPane(xint - 1, yint + 1) == null) {
-                remove();
+                grids.getChildren().remove(s3);
+                grids.getChildren().remove(s2);
                 s2 = addNewRect(xint, yint - 1);
                 s3 = addNewRect(xint - 1, yint + 1);
-                s4 = addNewRect(xint, yint);
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -766,10 +789,11 @@ public class Moves {
     public void z4() {
         try {
             if (getPane(xint + 1, yint) == null && getPane(xint - 1, yint - 1) == null) {
-                remove();
-                s2 = addNewRect(xint, yint);
+                grids.getChildren().remove(s3);
+                grids.getChildren().remove(s4);
                 s3 = addNewRect(xint - 1, yint - 1);
                 s4 = addNewRect(xint + 1, yint );
+                update();
                 rotations++;
             }
         } catch (IndexOutOfBoundsException e) {

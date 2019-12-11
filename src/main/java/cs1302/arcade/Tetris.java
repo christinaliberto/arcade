@@ -40,6 +40,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public class Tetris {
 
+    private Text info = new Text();
     private Timeline tl = new Timeline();
     private int score = 0;
     private int level = 1;
@@ -51,17 +52,19 @@ public class Tetris {
     /** creates a tetris game and sets style. */
     
     public Tetris() {
-        Stage tetris = new Stage();
-        tetris.initModality(Modality.APPLICATION_MODAL);
+        Stage tetris = new Stage(); //stage
+        tetris.initModality(Modality.APPLICATION_MODAL); //modal
         HBox main = new HBox();
         main.setPadding(new Insets(15, 12, 15, 12));
         main.setSpacing(20);
-        Image rainbow = new Image("file:resources/blocks_rainbow_3d_graphics_background_76559_6000x4000-3000x2000.jpg", 500, 620, false, false);
-        BackgroundImage back = new BackgroundImage(rainbow, BackgroundRepeat.NO_REPEAT,
+        Image r = new Image("file:resources/blocks_rainbow_3d" +
+                            "_graphics_background_76559_6000x4000-3000x2000.jpg",
+                            500, 620, false, false);
+        BackgroundImage back = new BackgroundImage(r, BackgroundRepeat.NO_REPEAT,
                                                    BackgroundRepeat.NO_REPEAT,
                                                    BackgroundPosition.DEFAULT,
                                                    BackgroundSize.DEFAULT);
-        Background background = new Background(back);
+        Background background = new Background(back); //setting window background
         main.setBackground(background);
         VBox left = new VBox();
         VBox right = new VBox();
@@ -69,34 +72,35 @@ public class Tetris {
         HBox rule = new HBox();
         left.setSpacing(40);
         next.setAlignment(Pos.CENTER);
-        next.setBackground(new Background(new BackgroundFill(Color.BLACK,
+        next.setBackground(new Background(new BackgroundFill(Color.BLACK, //setting txt box back
                                                              CornerRadii.EMPTY, Insets.EMPTY)));
         next.setStyle("-fx-padding: 0;" + "-fx-border-style: solid outside;"
                       + "-fx-border-width: 5;" + "-fx-border-insets: 5;"
                       + "-fx-border-radius: 5;" + "-fx-border-color: red;");
-        rule.setBackground(new Background(new BackgroundFill(Color.BLACK,
+        rule.setBackground(new Background(new BackgroundFill(Color.BLACK, //setting txt box back
                                                              CornerRadii.EMPTY, Insets.EMPTY)));
         rule.setStyle("-fx-padding: 0;" + "-fx-border-style: solid outside;"
                       + "-fx-border-width: 5;" + "-fx-border-insets: 5;"
                       + "-fx-border-radius: 5;" + "-fx-border-color: red;");
-        Text info = new Text();
-        info.setText("SCORE:\n" + score + "\n" + "LEVEL :\n" + level + "\n" + "LINES :\n" + lines);
-        info.setFill(Color.RED);
+        
+        info.setText( "SCORE:\n" + score + "\n" + "LEVEL :\n" + level + "\n" + "LINES :\n" + lines);
+        info.setFill(Color.RED); 
         info.setFont(Font.font("Futura", FontWeight.BOLD, 16));
         Text rules = new Text();
-        rules.setText("CONTROLS \n\n" + "⇨ to move right \n\n"
+        rules.setText("CONTROLS \n\n" + "⇨ to move right \n\n" //set controls text
                       + "⇦ to move left \n\n" + "⇧ to rotate \n\n" + "⇩ to move down \n");
         rules.setFill(Color.RED);
         rules.setFont(Font.font("Futura", FontWeight.BOLD, 16));
         next.getChildren().add(info);
         rule.getChildren().add(rules);
-        ImageView logo = new ImageView(new Image("file:resources/logo-game@2x.png", 150, 150, false, false));
-        left.getChildren().addAll(logo, next, rule);
+        ImageView logo = new ImageView(new Image("file:resources/logo-game@2x.png",
+                                                 150, 150, false, false));
+        left.getChildren().addAll(logo, next, rule); //add logo
         right.getChildren().addAll(makeGrid());
-        sq = new Square(grid);
-        //setTimeline(level);
-        //tl.play();
+        sq = new Square(grid); //new shape
+        setTimeline(); 
         main.getChildren().addAll(left, right);
+        updateScore();
         Scene scene = new Scene(main);
         scene.setOnKeyPressed(keyHandler());
         tetris.setTitle("Tetris");
@@ -104,12 +108,20 @@ public class Tetris {
         tetris.setHeight(620);
         tetris.setScene(scene);
         tetris.show();
+        tl.play(); // STARTS GAME  
     } //runTetris
 
+    /** updates info box as score level and line increase. */
+    
+    private void updateScore() {
+        info.setText("SCORE:\n" + score + "\n" + "LEVEL :\n" + level + "\n" + "LINES :\n" + lines);
+        info.setFill(Color.RED);
+        info.setFont(Font.font("Futura", FontWeight.BOLD, 16));
+    }
+        
     /** creates grid. 
      * @return GridPane
      */
-    
     public GridPane makeGrid() {
         // creates grid
         grid.setPrefSize(300, 600);
@@ -148,35 +160,31 @@ public class Tetris {
         }; //return
     } //KeyHandler
 
-     /** sets timeline for pieces moving down. 
-      * @param level the level
-      */
+     /** sets timeline for pieces moving down.*/
     
-    private void setTimeline(int level) {
+    private void setTimeline( ) {
         tl.stop();
         EventHandler<ActionEvent> handler = e -> {
             if (sq.down() == false) {
                 clearLines();
-                checkGameOver();
+                gameOver();
                 if (gameOver == false) {
                     sq = new Square(grid);
                     score += 10;
+                    updateScore();
+                    levels();
                 } //if
             } //if    
         };        
-        KeyFrame k;
-        switch (level) {
-        case 1:
+        KeyFrame k = new KeyFrame(Duration.millis(800), handler);
+        if (level == 1) {
             k = new KeyFrame(Duration.millis(800), handler);
-            break;
-        case 2:
+        }
+        if (level == 2) {
             k = new KeyFrame(Duration.millis(500), handler);
-            break;
-        case 3:
+        }
+        if (level == 3) {
             k = new KeyFrame(Duration.millis(200), handler);
-            break;
-        default:
-            k = new KeyFrame(Duration.millis(1000), handler);
         }
         tl.getKeyFrames().clear();
         tl.getKeyFrames().add(k);
@@ -196,6 +204,9 @@ public class Tetris {
             } //for
             if (isFull) {
                 score += 250;
+                lines++;
+                updateScore();
+                levels();
                 for (int x = 0; x < 10; x++) {
                     Rectangle rect = sq.getFromGrid(x, y);
                     grid.getChildren().remove(rect);
@@ -213,18 +224,26 @@ public class Tetris {
 
     /**checks to see if game is over. */
     
-    private void checkGameOver() {
+    private void gameOver() {
         for (int col = 0; col < 10; col++) {
             if (sq.getFromGrid(col, 0) != null) {
                 tl.stop();
                 gameOver = true;
-                Alert alert = new Alert(AlertType.NONE,
-                                        "GAME OVER!\n"  +
-                                        "Final score: " + score);
-                alert.show();
+                info.setText("GAME OVER");
                 
             }
         }
-    }
+    } //game over
+
+    /** increases level as gamer scores points. */
     
+    private void levels() {
+        if (score <= 100 ) {
+            level = 1;
+        } else if (score > 100 && score <= 300) {
+            level = 2;
+        } else {   
+            level = 3;
+        }
+    }
 } //tetris class 
