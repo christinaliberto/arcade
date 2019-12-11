@@ -28,30 +28,29 @@ public class Square {
     
     public Square(GridPane grid) {
         String[] tetromino = {"sq","I","J","L","T","S","Z"}; //all possible tetrominos
-	int r = 1;
-	//int r = (int)(Math.random() * 7); //to choose random tetromino
+        int r = (int)(Math.random() * 7); //to choose random tetromino
         if (tetromino[r].equals("sq")) {
             sq(grid);
             identity = "sq";
-	} else if (tetromino[r].equals("I")) {
+        } else if (tetromino[r].equals("I")) {
             i(grid);
             identity = "I";
-	} else if (tetromino[r].equals("J")) {
+        } else if (tetromino[r].equals("J")) {
             j(grid);
             identity = "J";
-	} else if (tetromino[r].equals("L")) {
+        } else if (tetromino[r].equals("L")) {
             l(grid);
             identity = "L";
-	} else if (tetromino[r].equals("T")) {
+        } else if (tetromino[r].equals("T")) {
             t(grid);
             identity = "T";
-	} else if (tetromino[r].equals("S")) {
+        } else if (tetromino[r].equals("S")) {
             s(grid);
             identity = "S";
-	} else if (tetromino[r].equals("Z")) {
+        } else if (tetromino[r].equals("Z")) {
             z(grid);
             identity = "Z";
-	} //if
+        } //if
         move = new Moves(shape, grid, x, y, identity, current, s1, s2, s3, s4);
     } //square
 
@@ -64,12 +63,12 @@ public class Square {
         s2 = new Rectangle(30,30);
         s3 = new Rectangle(30,30);
         s4 = new Rectangle(30,30);
-	current = Color.YELLOW;
-	s1.setFill(current); //color
+        current = Color.YELLOW;
+        s1.setFill(current); //color
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
-	y = 0;
+        y = 0;
         grid.add(s1,x,y);
         grid.add(s2,x + 1,y);
         grid.add(s3,x,y + 1);
@@ -86,12 +85,12 @@ public class Square {
         s2 = new Rectangle(30,30);
         s3 = new Rectangle(30,30);
         s4 = new Rectangle(30,30);
-	current = Color.TURQUOISE;
+        current = Color.TURQUOISE;
         s1.setFill(current); //color
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
-        y = 5;
+        y = 0;
         grid.add(s1,x,y);
         grid.add(s2,x + 1,y);
         grid.add(s3,x + 2,y);
@@ -129,7 +128,7 @@ public class Square {
         s2 = new Rectangle(30,30);
         s3 = new Rectangle(30,30);
         s4 = new Rectangle(30,30);
-	current = Color.BLUE;
+        current = Color.BLUE;
         s1.setFill(current); //color
         s2.setFill(current);
         s3.setFill(current);
@@ -151,8 +150,8 @@ public class Square {
         s2 = new Rectangle(30,30);
         s3 = new Rectangle(30,30);
         s4 = new Rectangle(30,30);
-	current = Color.ORANGE;
-	s1.setFill(current); //color
+        current = Color.ORANGE;
+        s1.setFill(current); //color
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
@@ -173,7 +172,7 @@ public class Square {
         s2 = new Rectangle(30,30);
         s3 = new Rectangle(30,30);
         s4 = new Rectangle(30,30);
-	current = Color.LIMEGREEN;
+        current = Color.LIMEGREEN;
         s1.setFill(current); //color
         s2.setFill(current);
         s3.setFill(current);
@@ -195,7 +194,7 @@ public class Square {
         s2 = new Rectangle(30,30); 
         s3 = new Rectangle(30,30);
         s4 = new Rectangle(30,30);
-	current = Color.RED;
+        current = Color.RED;
         s1.setFill(current); //color
         s2.setFill(current);
         s3.setFill(current);
@@ -209,12 +208,11 @@ public class Square {
     }
 
     /** calls move class for movement.  
-     * @param grid the grid
      * @param type the type
      */
     
     public void move(String type) {
-	move.direction(type);
+        move.direction(type);
     } //move 
 
 

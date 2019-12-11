@@ -21,8 +21,8 @@ public class Board {
 
     public void resetScore() {
 
-	player1Score = 2;
-	player2Score = 2;
+        player1Score = 2;
+        player2Score = 2;
     }
     
 
@@ -48,7 +48,7 @@ public class Board {
 
     public int returnRemaining() {
 
-	return remainingTiles;
+        return remainingTiles;
     }
 
     public boolean endGame() {
@@ -66,9 +66,9 @@ public class Board {
             return true;
         }
 
-	if (returnRemaining() == 0) {
+        if (returnRemaining() == 0) {
 
-	    return true;
+            return true;
         }
 
         return false;
@@ -127,135 +127,135 @@ public class Board {
 
     public void flip(int x, int y, Player player) {
 
-	board[x][y] = player.color;
-	
-	char opp = '?';
-	if (player.color == 'c') {
-	    opp = 'w';
-	} else {
-	    opp = 'c';
-	}
+        board[x][y] = player.color;
+        
+        char opp = '?';
+        if (player.color == 'c') {
+            opp = 'w';
+        } else {
+            opp = 'c';
+        }
 
-	int X = x;
-	int Y = y;
+        int X = x;
+        int Y = y;
 
-	if (x - 1 >= 0 && y - 1 >= 0 && board[x - 1][y - 1] == opp) {
-	    x = x - 1;
-	    y = y - 1;
-	    while (x > 0 && y > 0 && board[x][y] == opp) {
-		x--;
-		y--;
-	    }
-	    if (x >= 0 && y >= 0 && board[x][y] == player.color) {
-		while (x != X - 1 && y != Y - 1) {
-		    board[++x][++y] = player.color;
-		}
-	    }
-	}
+        if (x - 1 >= 0 && y - 1 >= 0 && board[x - 1][y - 1] == opp) {
+            x = x - 1;
+            y = y - 1;
+            while (x > 0 && y > 0 && board[x][y] == opp) {
+                x--;
+                y--;
+            }
+            if (x >= 0 && y >= 0 && board[x][y] == player.color) {
+                while (x != X - 1 && y != Y - 1) {
+                    board[++x][++y] = player.color;
+                }
+            }
+        }
 
-	x = X;
-	y = Y;
+        x = X;
+        y = Y;
 
-	if (x - 1 >= 0 && board[x - 1][y] == opp) {
-	    x = x - 1;
-	    while (x > 0 && board[x][y] == opp) {
-		x--;
-	    }
-	    if (x >= 0 && board[x][y] == player.color) {
-		while (x != X - 1) {
-		    board[++x][y] = player.color;
-		}
-	    }
-	}
+        if (x - 1 >= 0 && board[x - 1][y] == opp) {
+            x = x - 1;
+            while (x > 0 && board[x][y] == opp) {
+                x--;
+            }
+            if (x >= 0 && board[x][y] == player.color) {
+                while (x != X - 1) {
+                    board[++x][y] = player.color;
+                }
+            }
+        }
 
-	x = X;
-	if (x - 1 >= 0 && y + 1 < columns && board[x - 1][y + 1] == opp) {
-	    x = x - 1;
-	    y = y + 1;
-	    while (x > 0 && y < columns - 1 && board[x][y] == opp) {
-		if (x >= 0 && y < columns && board[x][y] == player.color) {
-		    while (x != X - 1 && y != Y + 1) {
-			board[++x][--y] = player.color;
-		    }
-		}
-	    }
-	}
+        x = X;
+        if (x - 1 >= 0 && y + 1 < columns && board[x - 1][y + 1] == opp) {
+            x = x - 1;
+            y = y + 1;
+            while (x > 0 && y < columns - 1 && board[x][y] == opp) {
+                if (x >= 0 && y < columns && board[x][y] == player.color) {
+                    while (x != X - 1 && y != Y + 1) {
+                        board[++x][--y] = player.color;
+                    }
+                }
+            }
+        }
 
-	x = X;
-	y = Y;
+        x = X;
+        y = Y;
 
-	if (y - 1 >= 0 && board[x][y - 1] == opp) {
-	    y = y - 1;
-	    while (y > 0 && board[x][y] == opp)  {
-		y--;
-	    }
-	    if (y >= 0 && board[x][y] == player.color)  {
-		while (y != Y - 1) {
-		    board[x][++y] = player.color;
-		}
-	    }
-	}
-	y = Y;
+        if (y - 1 >= 0 && board[x][y - 1] == opp) {
+            y = y - 1;
+            while (y > 0 && board[x][y] == opp)  {
+                y--;
+            }
+            if (y >= 0 && board[x][y] == player.color)  {
+                while (y != Y - 1) {
+                    board[x][++y] = player.color;
+                }
+            }
+        }
+        y = Y;
 
-	if (y + 1 < columns && board[x][y + 1] == opp) {
-	    y = y + 1;
-	    while (y < columns - 1 && board[x][y] == opp) {
-		y++;
-	    }
-	    if (y < columns && board[x][y] == player.color) {
-		while (y != Y + 1) {
-		    board[x][--y] = player.color;
-		}
-	    }
-	}
-	y = Y;
+        if (y + 1 < columns && board[x][y + 1] == opp) {
+            y = y + 1;
+            while (y < columns - 1 && board[x][y] == opp) {
+                y++;
+            }
+            if (y < columns && board[x][y] == player.color) {
+                while (y != Y + 1) {
+                    board[x][--y] = player.color;
+                }
+            }
+        }
+        y = Y;
 
-	if (x + 1 < rows && y - 1 >= 0 && board[x + 1][y - 1] == opp) {
-	    x = x + 1;
-	    y = y - 1;
-	    while (x < rows - 1 && y > 0 && board[x][y] == opp) {
-		x++;
-		y--;
-	    }
-	    if (x < rows && y >= 0 && board[x][y] == player.color) {
-		while (x != X + 1 && y != Y - 1) {
-		    board[--x][++y] = player.color;
-		}
-	    }
-	}
+        if (x + 1 < rows && y - 1 >= 0 && board[x + 1][y - 1] == opp) {
+            x = x + 1;
+            y = y - 1;
+            while (x < rows - 1 && y > 0 && board[x][y] == opp) {
+                x++;
+                y--;
+            }
+            if (x < rows && y >= 0 && board[x][y] == player.color) {
+                while (x != X + 1 && y != Y - 1) {
+                    board[--x][++y] = player.color;
+                }
+            }
+        }
 
-	x = X;
-	y = Y;
-	if (x + 1 < rows && board[x + 1][y] == opp) {
-	    x = x + 1;
-	    while (x < rows - 1 && board[x][y] == opp)  {
-		x++;
-	    }
-	    if (x < rows && board[x][y] == player.color) {
-		while (x != X + 1)  {
-		    board[--x][y] = player.color;
-		}
-	    }
-	}
-	x = X;
+        x = X;
+        y = Y;
+        if (x + 1 < rows && board[x + 1][y] == opp) {
+            x = x + 1;
+            while (x < rows - 1 && board[x][y] == opp)  {
+                x++;
+            }
+            if (x < rows && board[x][y] == player.color) {
+                while (x != X + 1)  {
+                    board[--x][y] = player.color;
+                }
+            }
+        }
+        x = X;
 
-	if (x + 1 < rows && y + 1 < columns && board[x + 1][y + 1] == opp) {
-	    x = x + 1;
-	    y = y + 1;
-	    while ( x < rows - 1 && y < columns - 1 && board[x][y] == opp) {
-		x++;
-		y++;
-	    }
-	    if (x < rows && y < columns && board[x][y] == player.color) {
-		while (x != X + 1 && y != Y + 1) {
-		    board[--x][--y] = player.color;
-		}
-	    }
-	}
+        if (x + 1 < rows && y + 1 < columns && board[x + 1][y + 1] == opp) {
+            x = x + 1;
+            y = y + 1;
+            while ( x < rows - 1 && y < columns - 1 && board[x][y] == opp) {
+                x++;
+                y++;
+            }
+            if (x < rows && y < columns && board[x][y] == player.color) {
+                while (x != X + 1 && y != Y + 1) {
+                    board[--x][--y] = player.color;
+                }
+            }
+        }
     }
     
-								       
-						   
+                                                                       
+                                                   
     public void resetBoard() {
 
         for (int i = 0; i < rows; i++) {
@@ -502,14 +502,14 @@ public class Board {
     }
 
     public void printBoard() {
-	for (int i = 0; i < 8; i++) {
-	    //System.out.print(i);
-	    for (int x = 0; x < 8; x++)  {
-		System.out.print(board[i][x]);
-	    }
-	    System.out.println();
-	}
-	
+        for (int i = 0; i < 8; i++) {
+            //System.out.print(i);
+            for (int x = 0; x < 8; x++)  {
+                System.out.print(board[i][x]);
+            }
+            System.out.println();
+        }
+        
     }
 }               
                           
