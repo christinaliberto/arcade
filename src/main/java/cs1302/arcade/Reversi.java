@@ -150,7 +150,17 @@ public void validMoves() {
 	}
  
     }
-    
+
+    public void recurseReversi() {
+
+	setPiece(turn.color);
+	reversiBoard.resetBoard();
+	playerSwitch();
+	reversiBoard.hint(turn);
+	reversiBoard.scores();
+	validMoves();
+	updateScores();
+    }
    
 
 			  
@@ -172,7 +182,6 @@ public void start (Stage stage) {
 	    gameSpaces.getChildren().add(gameBoard[i][x]);
 	    
 	    gameBoard[i][x].setOnMouseClicked(e -> {
-		    // System.out.println(e);
 
 		    click1 = (int)(e.getSceneY()/SIZEOFTILES);
 		    click2 = (int)(e.getSceneX()/SIZEOFTILES);
@@ -180,15 +189,7 @@ public void start (Stage stage) {
 		    if (reversiBoard.valid(click2, click1)) {
 
 			reversiBoard.flip(click2, click1, turn);
-			
-			setPiece(turn.color);
-
-			reversiBoard.resetBoard();
-			playerSwitch();
-			reversiBoard.hint(turn);
-			reversiBoard.scores();
-			validMoves();
-			updateScores();
+			recurseReversi(); 
 			if (reversiBoard.endGame()) {
 			    createGameOver();
 			    reversiBoard.resetScore();
@@ -203,6 +204,7 @@ public void start (Stage stage) {
     reversiV.getChildren().addAll(gameSpaces);
     reversiBoard.resetScore(); 
     createScores();
+    
     reversiV.getChildren().add(playerScores);
     
     Scene scene = new Scene(reversiV, 400, 475);

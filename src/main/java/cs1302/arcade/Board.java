@@ -583,9 +583,6 @@ public class Board {
         }
     }
 
-    
-    
-    
     public boolean isInBounds(int row, int col) {
         return (row < 8 && row >= 0 && col >=0 && col < 8);
     }
