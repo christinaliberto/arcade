@@ -11,14 +11,10 @@ import javafx.scene.layout.GridPane;
 public class Moves {
 
     boolean valid;
-    Rectangle s1;
+    Rectangle s1; //tetrimino pieces
     Rectangle s2;
     Rectangle s3;
     Rectangle s4;
-    Rectangle s5;
-    Rectangle s6;
-    Rectangle s7;
-    Rectangle s8;
     Rectangle[] shape = new Rectangle[4] ;
     GridPane grids;
     int xint;
@@ -42,14 +38,14 @@ public class Moves {
     
     public Moves(Rectangle[] x, GridPane grid, int k, int l, String ident, Color co,
                  Rectangle a, Rectangle b, Rectangle c, Rectangle d) {
-        s1 = a;
+        s1 = a; //sets all the values from the shapes class into the moves class
         s2 = b;
         s3 = c;
         s4 = d;
-	shape[0] = s1;
-	shape[1] = s2;
-	shape[2] = s3;
-	shape[3] = s4;
+        shape[0] = s1;
+        shape[1] = s2;
+        shape[2] = s3;
+        shape[3] = s4;
         grids = grid;
         xint = k;
         yint = l;
@@ -60,9 +56,9 @@ public class Moves {
     /** calls the proper method to match the key clicked.
      * @param type the key pressed
      */
-    
+ 
     public void direction( String type) {
-        if (type.equals("down")) {
+        if (type.equals("down")) {    //directory for the move methods
             moveToBottom();          
         } else if (type.equals("right")) {
             moveRight();
@@ -82,73 +78,79 @@ public class Moves {
     public Rectangle addNewRect(int row, int col) {
         Rectangle s = new Rectangle(30, 30);
         s.setFill(current);
-        grids.add(s, row, col);
+        grids.add(s, row, col); //replaces removed rectangle
         return s;
     }
 
-    /**  moves the tetrimino down one row. */
+    /**  moves the tetrimino down one row. 
+     * @return boolean
+     */
     
     public boolean moveDown() {
-	int col, row;
+        int col, row;
         boolean canMove = true;
-	for(Rectangle r : shape) {
-            if(r != null) {
-		col = GridPane.getColumnIndex(r);
+        for (Rectangle r : shape) {
+            if ( r != null) {
+                col = GridPane.getColumnIndex(r); //gets row and col index
                 row = GridPane.getRowIndex(r);
-                if(row == 19) { 
+                if (row == 19) { //checks bounds 
                     canMove = false;
                 } else { 
                     Rectangle next = getPane(col, row + 1);
-                    if(next != null && isPiece(next) == false) {
+                    if (next != null && isPiece(next) == false) { //checks if space is open
                         canMove = false;
-                    }
-		    
-                }
-            }
-        }
+                    } //if
+                    
+                } //if
+            } //if
+        } //for
 
-	if(canMove) {
-	    yint++;
-	    for(Rectangle r : shape) {
-		if(r != null) {
-		    row = GridPane.getRowIndex(r);
-		    GridPane.setRowIndex(r, row + 1);
-		    
-		}
-	    }
-	}
-	return canMove;
-    }
-        
-     public void moveToBottom() {
-        while(moveDown() == true);
+        if (canMove) {
+            yint++;
+            for (Rectangle r : shape) {
+                if (r != null) {
+                    row = GridPane.getRowIndex(r);
+                    GridPane.setRowIndex(r, row + 1); //adds shape to new index
+                    
+                } //if
+            } //if
+        } //for
+        return canMove;
+    } //move
+
+    /** moves tetrimino all the way to the bottom. */
+    
+    public void moveToBottom() {
+        while (moveDown() == true) {
+            int nothing = 0; // random filler for checkstyle
+        }
     }
     
     /**  moves the tetrimino  left one column. */
     
     public void moveLeft() {
-	 int col, row;
+        int col, row;
         boolean canMove = true;
-        for(Rectangle r : shape) {
-            if(r != null) {
-		col = GridPane.getColumnIndex(r);
+        for (Rectangle r : shape) {
+            if (r != null) {
+                col = GridPane.getColumnIndex(r);
                 row = GridPane.getRowIndex(r);
-                if(row == 19) {
+                if (col == 0) {
                     canMove = false;
                 } else {
                     Rectangle next = getPane(col - 1, row);
-                    if(next != null && isPiece(next) == false) {
+                    if (next != null && isPiece(next) == false) {
                         canMove = false;
                     }
 
-		}
+                }
             }
         }
 
-        if(canMove) {
+        if (canMove) {
             xint++;
-            for(Rectangle r : shape) {
-                if(r != null) {
+            for (Rectangle r : shape) {
+                if (r != null) {
                     col = GridPane.getColumnIndex(r);
                     GridPane.setColumnIndex(r, col - 1);
 
@@ -161,28 +163,28 @@ public class Moves {
     /**  moves the tetrimino  right one column. */
 
     public void moveRight() {
-	 int col, row;
+        int col, row;
         boolean canMove = true;
-        for(Rectangle r : shape) {
-            if(r != null) {
-		col = GridPane.getColumnIndex(r);
+        for (Rectangle r : shape) {
+            if (r != null) {
+                col = GridPane.getColumnIndex(r);
                 row = GridPane.getRowIndex(r);
-                if(row == 19) {
+                if (col == 9) {
                     canMove = false;
                 } else {
                     Rectangle next = getPane(col + 1, row);
-                    if(next != null && isPiece(next) == false) {
+                    if (next != null && isPiece(next) == false) {
                         canMove = false;
                     }
 
-		}
+                }
             }
         }
 
-        if(canMove) {
+        if (canMove) {
             xint++;
-            for(Rectangle r : shape) {
-                if(r != null) {
+            for (Rectangle r : shape) {
+                if (r != null) {
                     col = GridPane.getColumnIndex(r);
                     GridPane.setColumnIndex(r, col + 1);
 
@@ -201,14 +203,14 @@ public class Moves {
     public Rectangle getPane(int col, int row) {
         for (Node node : grids.getChildren()) {
             if (node != null && GridPane.getColumnIndex(node) != null
-                && GridPane.getRowIndex(node) != null) {
+                && GridPane.getRowIndex(node) != null) { //checks null conditions
                 if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
                     return (Rectangle)node;
-                }
-            }
-        }
+                } //if
+            } //if
+        } //if
         return null;
-    }
+    } //getpane
 
     /** deternines if a rectangle is a piece of the tetrimino.  
      * @param x the rectangle
@@ -218,7 +220,7 @@ public class Moves {
     public boolean isPiece(Rectangle x) {
         if (x == s1 || x == s2 || x == s3 || x == s4) {
             return true;
-        } else {
+        } else { //checks to see if rectangle is current piece or on bottom
             return false;
         } //if            
     } //is piece
@@ -227,7 +229,7 @@ public class Moves {
     
     public void rotate() {
         if (id.equals("sq")) {
-            sqLoc();
+            sqLoc(); //directory 1 for rotations
         } else if (id.equals("I")) {
             iLoc();
         } else if (id.equals("J")) {
@@ -242,6 +244,8 @@ public class Moves {
             zLoc();
         } //if 
     } // rotate
+
+    // methods below are the secondary directories for rotations
     
     /** uses the location of the tetrimino to determine the proper rotate method. */
     
@@ -260,7 +264,7 @@ public class Moves {
             i3();
         } else if (rotations == 3) {
             i4();
-        }
+        } //if
     } //location
 
     /** uses the location of the tetrimino to determine the proper rotate method. */
@@ -274,7 +278,7 @@ public class Moves {
             j3();
         } else if (rotations == 3) {
             j4();
-        }
+        } //if
     } //location
 
     /** uses the location of the tetrimino to determine the proper rotate method. */
@@ -288,7 +292,7 @@ public class Moves {
             l3();
         } else if (rotations == 3) {
             l4();
-        }
+        } //if
     } //location
 
     /** uses the location of the tetrimino to determine the proper rotate method. */
@@ -302,7 +306,7 @@ public class Moves {
             t3();
         } else if (rotations == 3) {
             t4();
-        }
+        } //if
     } //location
 
     /** uses the location of the tetrimino to determine the proper rotate method. */
@@ -316,7 +320,7 @@ public class Moves {
             s3();
         } else if (rotations == 3) {
             s4();
-        }
+        } //if
     } //location
 
     /** uses the location of the tetrimino to determine the proper rotate method. */
@@ -330,7 +334,7 @@ public class Moves {
             z3();
         } else if (rotations == 3) {
             z4();
-        }
+        } //if
     } //location
 
     /** removes rectangles for rotation process. */
@@ -354,10 +358,10 @@ public class Moves {
                 s3 = addNewRect(xint, yint + 2);
                 s4 = addNewRect(xint, yint + 3);
                 rotations++;
-            }
+            } //if
         } catch (IndexOutOfBoundsException e) {
             int nothing = 0; //for checkstyle no empty block
-        }
+        } //if
     } //rotations
 
     /** rotates tetromino to desired position. */
@@ -376,7 +380,7 @@ public class Moves {
             }
         } catch (IndexOutOfBoundsException e) {
             int nothing = 0;
-        }
+        } //if
     } //rotations
 
     /** rotates tetromino to desired position. */
@@ -395,7 +399,7 @@ public class Moves {
             }
         } catch (IndexOutOfBoundsException e) {
             int nothing = 0; //for checkstyle no empty block    
-        }
+        } //if
     } //rotations
 
     /** rotates tetromino to desired position. */
@@ -414,7 +418,7 @@ public class Moves {
             }
         } catch (IndexOutOfBoundsException e) {
             int nothing = 0; //for checkstyle no empty block    
-        }
+        } //if
     } //rotations
 
     /** rotates tetromino to desired position. */
@@ -433,7 +437,7 @@ public class Moves {
             }
         } catch (IndexOutOfBoundsException e) {
             int nothing = 0; //for checkstyle no empty block
-        }
+        } //if
     } //rotations
 
     /** rotates tetromino to desired position. */
@@ -452,7 +456,7 @@ public class Moves {
             }
         } catch (IndexOutOfBoundsException e) {
             int nothing = 0; //for checkstyle no empty block
-        }
+        } //if
     } //rotations
 
     /** rotates tetromino to desired position. */

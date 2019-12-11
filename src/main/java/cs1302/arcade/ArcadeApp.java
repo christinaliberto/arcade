@@ -124,6 +124,7 @@ public class ArcadeApp extends Application {
                                                  BackgroundSize.DEFAULT);
         Background mainBackground = new Background(bg);
 
+
         return mainBackground;
     }
 

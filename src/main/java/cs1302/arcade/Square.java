@@ -13,15 +13,16 @@ public class Square {
 
     public int x = 4;
     public int y;
-    public Rectangle s1 = new Rectangle(30,30);
+    public Rectangle s1 = new Rectangle(30,30); //the four rectangles for all tetriminoes
     public Rectangle s2 = new Rectangle(30,30);
     public Rectangle s3 = new Rectangle(30,30);
     public Rectangle s4 = new Rectangle(30,30);
-    public Rectangle[] shape = { s1, s2, s3, s4 };
+    public Rectangle[] shape = { s1, s2, s3, s4 }; // array to keep them together
     public String identity = "";
     public int rotations = 0;
     public Color current;
     public Moves move;
+
     /** construct a random tetromino. 
      * @param grid the grid
      */
@@ -68,7 +69,7 @@ public class Square {
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
-        y = 0;
+        y = 5;
         grid.add(s1,x,y);
         grid.add(s2,x + 1,y);
         grid.add(s3,x,y + 1);
@@ -90,7 +91,7 @@ public class Square {
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
-        y = 0;
+        y = 5;
         grid.add(s1,x,y);
         grid.add(s2,x + 1,y);
         grid.add(s3,x + 2,y);
@@ -111,7 +112,7 @@ public class Square {
         s2.setFill(Color.HOTPINK);
         s3.setFill(Color.HOTPINK);
         s4.setFill(Color.HOTPINK);
-        y = 1;
+        y = 5;
         grid.add(s1,x,y);
         grid.add(s2,x,y - 1);
         grid.add(s3,x + 1,y);
@@ -133,7 +134,7 @@ public class Square {
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
-        y = 1;
+        y = 5;
         grid.add(s1,x,y);
         grid.add(s2,x - 1,y);
         grid.add(s3,x - 1,y - 1);
@@ -155,7 +156,7 @@ public class Square {
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
-        y = 1;
+        y = 5;
         grid.add(s1, x, y);
         grid.add(s2, x + 1, y);
         grid.add(s3, x + 1, y - 1);
@@ -177,7 +178,7 @@ public class Square {
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
-        y = 1;
+        y = 5;
         grid.add(s1, x, y);
         grid.add(s2, x, y - 1);
         grid.add(s3, x + 1, y - 1);
@@ -199,7 +200,7 @@ public class Square {
         s2.setFill(current);
         s3.setFill(current);
         s4.setFill(current);
-        y = 1;
+        y = 5;
         grid.add(s1, x, y);
         grid.add(s2, x, y - 1);
         grid.add(s3, x - 1, y - 1);
@@ -207,6 +208,9 @@ public class Square {
 
     }
 
+    //the following methods make the move class
+    //available to the main tetris class
+    
     /** calls move class for movement.  
      * @param type the type
      */
@@ -214,17 +218,27 @@ public class Square {
     public void move(String type) {
         move.direction(type);
     } //move 
+    
+    /** calls move class for timeline. 
+     * @return boolean
+     */
 
     public boolean down() {
-	if(move.moveDown() == false) {
-	    return false;
-	} else {
-	    return true;
-	}
+        if (move.moveDown() == false) {
+            return false;
+        } else {
+            return true;
+        }
     }
-
+    
+    /** calls move class for tetris class access. 
+     * @param col the column
+     * @param row the row
+     * @return Rectangle
+     */
+    
     public Rectangle getFromGrid( int col, int row) {
-	 return move.getPane( col, row);
+        return move.getPane( col, row);
     }
-
+    
 } //square
