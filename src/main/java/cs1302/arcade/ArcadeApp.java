@@ -48,7 +48,7 @@ import javafx.scene.effect.Reflection;
 public class ArcadeApp extends Application {
 
     Reversi reversiGame = new Reversi();
-    
+    System.out.println("");
     Group group = new Group();           // main container
     Random rng = new Random();           // random number generator
     Rectangle r = new Rectangle(20, 20); // some rectangle
